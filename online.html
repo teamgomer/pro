@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>สถานะเซิร์ฟเวอร์</title>
+
+    <style>
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background-color: #f7f7f7;
+
+        }
+
+        h1 {
+
+            text-align: center;
+
+            color: #333;
+
+        }
+
+        table {
+
+            width: 70%;
+
+            margin: 20px auto;
+
+            border-collapse: collapse;
+
+            background-color: #fff;
+
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+        }
+
+        th, td {
+
+            border: 1px solid #ddd;
+
+            padding: 12px;
+
+            text-align: left;
+
+        }
+
+        th {
+
+            background-color: #f2f2f2;
+
+        }
+
+        font {
+
+            color: #FF0000;
+
+        }
+
+        .total-users {
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            font-weight: bold;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h1>สถานะเซิร์ฟเวอร์</h1>
+
+    <?php
+
+    $servers = [
+
+        'TH-01' => 'http://185.84.161.73:82/server/online',
+
+        'TH-02' => 'http://185.84.161.73:82/server/online',
+
+    ];
+
+
+
+    $totalOnlineCount = 0;
+
+
+
+    echo '<table>';
+
+    echo '<tr><th>สถานะ</th><th>เซิร์ฟเวอร์</th></tr>';
+
+
+
+    foreach ($servers as $serverName => $serverURL) {
+
+        $response = @file_get_contents($serverURL);
+
+
+
+        if ($response !== false) {
+
+            $onlineCount = intval($response);
+
+            echo "<tr><td>$serverName</td><td>กำลังออนไลน์ <font color='#FF0000'>$onlineCount</font> คน</td></tr>";
+
+            $totalOnlineCount += $onlineCount;
+
+        } else {
+
+            $error = error_get_last();
+
+            echo "<tr><td>$serverName</td><td>ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้ - ข้อผิดพลาด: " . $error['message'] . "</td></tr>";
+
+        }
+
+    }
+
+
+
+    echo '</table>';
+
+
+
+    // ตรวจสอบว่าโหลดนานเกินไปแล้วถ้าใช่ให้รีเฟรชหน้า
+
+    if (connection_status() != CONNECTION_NORMAL) {
+
+        header("Refresh:0");
+
+    }
+
+    echo "<div class='total-users'>ผู้ใช้งานทั้งหมดในทุกเซิร์ฟเวอร์: <font color='#3358FF'>$totalOnlineCount</font> คน</div>";
+
+    ?>
+
+</body>
+
+  </html>
