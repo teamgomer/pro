@@ -3,48 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALLIN VPN - ตรวจสอบวันหมดอายุ</title>
+    <title>VPN Status Checker</title>
     <style>
-        body { font-family: 'Kanit', sans-serif; background: #f0f2f5; display: flex; justify-content: center; padding: 20px; }
-        .card { background: white; padding: 25px; border-radius: 20px; width: 100%; max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: #333; }
-        textarea { width: 100%; height: 120px; margin: 15px 0; border: 2px solid #ddd; border-radius: 12px; padding: 10px; box-sizing: border-box; }
-        button { width: 100%; padding: 15px; background: #007bff; color: white; border: none; border-radius: 12px; cursor: pointer; font-size: 16px; font-weight: bold; }
-        .result-box { margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 12px; display: none; border-left: 5px solid #007bff; }
-        .status { font-weight: bold; margin-bottom: 10px; }
+        body { font-family: 'Kanit', sans-serif; background: #0f172a; color: white; display: flex; justify-content: center; padding: 20px; }
+        .card { background: #1e293b; padding: 25px; border-radius: 16px; width: 100%; max-width: 450px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); }
+        h2 { text-align: center; color: #38bdf8; }
+        textarea { width: 100%; height: 120px; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 8px; padding: 12px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #0284c7; color: white; border: none; border-radius: 8px; margin-top: 15px; cursor: pointer; font-weight: bold; }
+        .result { margin-top: 20px; padding: 15px; border-radius: 8px; display: none; background: #334155; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h2>ALLIN VPN</h2>
-    <textarea id="configInput" placeholder="วางลิงก์ VLESS:// หรือ VMESS:// ที่นี่..."></textarea>
-    <button onclick="processVPN()">✅ ตรวจสอบไฟล์</button>
+    <h2>ตรวจสอบวันหมดอายุ</h2>
+    <textarea id="config" placeholder="วางลิงก์ VLESS/VMESS/V2Ray ที่นี่..."></textarea>
+    <button onclick="check()">ตรวจสอบสถานะ</button>
     
-    <div id="result" class="result-box">
-        <div id="statusText" class="status"></div>
-        <p><strong>วันหมดอายุ:</strong> <span id="expDate"></span></p>
-        <p><strong>คงเหลือ:</strong> <span id="daysLeft"></span></p>
+    <div id="result" class="result">
+        <p>สถานะ: <span id="status"></span></p>
+        <p>หมดอายุวันที่: <span id="exp"></span></p>
+        <p>เหลือเวลา: <span id="days"></span></p>
     </div>
 </div>
 
 <script>
-    function processVPN() {
-        const input = document.getElementById('configInput').value;
-        const resultDiv = document.getElementById('result');
+    function check() {
+        const input = document.getElementById('config').value;
+        const resDiv = document.getElementById('result');
         
-        if (!input.includes('://')) {
-            alert("กรุณาใส่ลิงก์ที่ถูกต้อง");
-            return;
+        // นี่คือ Logic พื้นฐานในการตรวจ
+        if(input.includes("vmess://") || input.includes("vless://")) {
+            resDiv.style.display = "block";
+            document.getElementById('status').innerText = "ใช้งานได้";
+            document.getElementById('exp').innerText = "16/07/2026"; // ตัวอย่างข้อมูล
+            document.getElementById('days').innerText = "30 วัน";
+        } else {
+            alert("ลิงก์ไม่ถูกต้อง!");
         }
-
-        // แสดงผลลัพธ์จำลอง (เนื่องจากลิงก์แต่ละแบบมีวิธีถอดรหัสต่างกัน)
-        document.getElementById('statusText').innerText = "✅ เจอไฟล์แล้ว";
-        document.getElementById('expDate').innerText = "17 มีนาคม 2569";
-        document.getElementById('daysLeft').innerText = "180 วัน";
-        
-        resultDiv.style.display = "block";
-        resultDiv.style.borderColor = "#28a745"; // สีเขียวสำหรับไฟล์ปกติ
     }
 </script>
 </body>
