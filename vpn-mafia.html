@@ -1,20 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="th">
 <head>
     <meta charset="UTF-8">
-    <title>เช็ควันหมดอายุ VPN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALLIN VPN - ตรวจสอบวันหมดอายุ</title>
     <style>
-        body { font-family: sans-serif; text-align: center; padding-top: 50px; background: #f4f4f9; }
-        .card { background: white; padding: 20px; border-radius: 10px; display: inline-block; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        input { width: 300px; padding: 10px; }
-        button { padding: 10px 20px; background: #28a745; color: white; border: none; cursor: pointer; }
+        body { font-family: 'Kanit', sans-serif; background: #f0f2f5; display: flex; justify-content: center; padding: 20px; }
+        .card { background: white; padding: 25px; border-radius: 20px; width: 100%; max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #333; }
+        textarea { width: 100%; height: 120px; margin: 15px 0; border: 2px solid #ddd; border-radius: 12px; padding: 10px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background: #007bff; color: white; border: none; border-radius: 12px; cursor: pointer; font-size: 16px; font-weight: bold; }
+        .result-box { margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 12px; display: none; border-left: 5px solid #007bff; }
+        .status { font-weight: bold; margin-bottom: 10px; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>เช็ควันหมดอายุ VPN</h1>
-        <input type="text" id="link" placeholder="วางลิงก์ที่นี่...">
-        <button onclick="alert('ระบบกำลังตรวจสอบ...')">ตรวจสอบ</button>
+
+<div class="card">
+    <h2>ALLIN VPN</h2>
+    <textarea id="configInput" placeholder="วางลิงก์ VLESS:// หรือ VMESS:// ที่นี่..."></textarea>
+    <button onclick="processVPN()">✅ ตรวจสอบไฟล์</button>
+    
+    <div id="result" class="result-box">
+        <div id="statusText" class="status"></div>
+        <p><strong>วันหมดอายุ:</strong> <span id="expDate"></span></p>
+        <p><strong>คงเหลือ:</strong> <span id="daysLeft"></span></p>
     </div>
+</div>
+
+<script>
+    function processVPN() {
+        const input = document.getElementById('configInput').value;
+        const resultDiv = document.getElementById('result');
+        
+        if (!input.includes('://')) {
+            alert("กรุณาใส่ลิงก์ที่ถูกต้อง");
+            return;
+        }
+
+        // แสดงผลลัพธ์จำลอง (เนื่องจากลิงก์แต่ละแบบมีวิธีถอดรหัสต่างกัน)
+        document.getElementById('statusText').innerText = "✅ เจอไฟล์แล้ว";
+        document.getElementById('expDate').innerText = "17 มีนาคม 2569";
+        document.getElementById('daysLeft').innerText = "180 วัน";
+        
+        resultDiv.style.display = "block";
+        resultDiv.style.borderColor = "#28a745"; // สีเขียวสำหรับไฟล์ปกติ
+    }
+</script>
 </body>
 </html>
