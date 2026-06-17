@@ -13,7 +13,24 @@
     <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
         
         <script>
-            // ฟังก์ชันดาวน์โหลดรูป
+            // 1. ฟังก์ชันคัดลอก Config
+            function copyToClipboard(text) {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert("คัดลอก Config เรียบร้อยแล้ว!");
+                });
+            }
+
+            // 2. ฟังก์ชันดาวน์โหลดไฟล์ Config
+            function downloadConfigFile(content, filename) {
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                a.click();
+            }
+
+            // 3. ฟังก์ชันดาวน์โหลดรูป QR
             async function downloadImage(imageSrc, name) {
                 const response = await fetch(imageSrc);
                 const blob = await response.blob();
@@ -21,13 +38,11 @@
                 const a = document.createElement('a');
                 a.href = url;
                 a.download = name + ".jpg";
-                document.body.appendChild(a);
                 a.click();
-                document.body.removeChild(a);
             }
 
-            // ฟังก์ชันสร้าง Card พร้อมลิงก์ดาวน์โหลดแอป
-            function createCard(title, app, imgSrc, appLink) {
+            // 4. ฟังก์ชันสร้าง Card
+            function createCard(title, app, imgSrc, appLink, configContent) {
                 document.write(`
                     <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl hover:border-blue-500 transition-all">
                         <div class="mb-4">
@@ -37,14 +52,10 @@
                         <img src="${imgSrc}" alt="${title}" class="w-full h-auto rounded-lg mb-4 border-2 border-slate-700">
                         
                         <div class="flex flex-col gap-2">
-                            <button onclick="downloadImage('${imgSrc}', '${title}')" 
-                                    class="w-full bg-slate-700 hover:bg-emerald-600 py-2 rounded-lg text-sm font-bold transition">
-                                บันทึก QR Code
-                            </button>
-                            <a href="${appLink}" target="_blank" 
-                               class="w-full bg-blue-500 hover:bg-blue-700 py-2 rounded-lg text-sm font-bold text-center transition">
-                                ดาวน์โหลดแอป ${app} (Play Store)
-                            </a>
+                            <button onclick="copyToClipboard(\`${configContent}\`)" class="w-full bg-emerald-600 hover:bg-emerald-700 py-2 rounded-lg text-sm font-bold transition">คัดลอก Config</button>
+                            <button onclick="downloadImage('${imgSrc}', '${title}')" class="w-full bg-slate-700 hover:bg-slate-600 py-2 rounded-lg text-sm font-bold transition">บันทึก QR Code</button>
+                            <button onclick="downloadConfigFile(\`${configContent}\`, '${title}.txt')" class="w-full bg-indigo-600 hover:bg-indigo-700 py-2 rounded-lg text-sm font-bold transition">บันทึกไฟล์ Config (.txt)</button>
+                            <a href="${appLink}" target="_blank" class="w-full bg-blue-500 hover:bg-blue-700 py-2 rounded-lg text-sm font-bold text-center transition">ดาวน์โหลดแอป ${app}</a>
                         </div>
                     </div>
                 `);
@@ -55,10 +66,11 @@
             const v2boxLink = "https://play.google.com/store/apps/details?id=dev.hexasoftware.v2box";
             const netmodLink = "https://play.google.com/store/apps/details?id=com.netmod.syna";
 
-            createCard("AIS โปร 64K 128K", "V2BOX", "https://img1.pic.in.th/images/14392.jpg", v2boxLink);
-            createCard("TRUE โปร ZOOM", "V2BOX", "https://img2.pic.in.th/14393.jpg", v2boxLink);
-            createCard("DTAC โปร GAMING", "NETMOD", "https://img2.pic.in.th/14396.jpg", netmodLink);
-            createCard("TRUE โปร TWITTER & IG", "NETMOD", "https://img1.pic.in.th/images/14397.jpg", netmodLink);
+            // ใส่ Config จริงของคุณลงในช่องสุดท้ายแทนที่ข้อความ vless://...
+            createCard("AIS โปร 64K 128K", "V2BOX", "https://img1.pic.in.th/images/14392.jpg", v2boxLink, "vless://your-actual-config-string-here");
+            createCard("TRUE โปร ZOOM", "V2BOX", "https://img2.pic.in.th/14393.jpg", v2boxLink, "vmess://your-actual-config-string-here");
+            createCard("DTAC โปร GAMING", "NETMOD", "https://img2.pic.in.th/14396.jpg", netmodLink, "your-netmod-config-string-here");
+            createCard("TRUE โปร TWITTER & IG", "NETMOD", "https://img1.pic.in.th/images/14397.jpg", netmodLink, "your-netmod-config-string-here");
         </script>
 
     </div>
