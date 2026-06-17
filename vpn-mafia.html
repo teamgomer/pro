@@ -3,59 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Config V2Ray</title>
+    <title>Config Panel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
-<body class="bg-slate-900 text-white min-h-screen p-4">
+<body class="bg-slate-900 text-white min-h-screen p-6">
 
-    <header class="text-center py-10">
-        <h1 class="text-4xl font-bold text-blue-400">Free V2Ray Config</h1>
-    </header>
+    <h1 class="text-3xl font-bold text-center mb-10 text-blue-400">Config Manager</h1>
 
-    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4" id="config-container">
+    <!-- Grid 4 Config -->
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 shadow-lg">
-            <div class="flex justify-between mb-4">
-                <span class="bg-blue-600 px-3 py-1 rounded-full text-xs font-bold">VLESS</span>
-                <span class="text-sm">🇹🇭 Thailand</span>
-            </div>
-            <p class="text-slate-400 text-sm mb-4">Ping: 25ms | Exp: 30 Days</p>
-            <div class="flex gap-2">
-                <button onclick="copyToClipboard('vless://your-config-link')" class="flex-1 bg-blue-500 hover:bg-blue-600 py-2 rounded-lg text-sm font-bold transition">Copy</button>
-                <button onclick="showQR('vless://your-config-link')" class="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg text-sm transition">QR Code</button>
-            </div>
-        </div>
+        <!-- ทำซ้ำส่วนนี้ 4 ครั้ง -->
+        <script>
+            function createConfigCard(name, type, link) {
+                document.write(`
+                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-600 px-3 py-1 rounded-full text-xs font-bold">${type}</span>
+                            <span class="text-sm font-semibold">${name}</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 mt-4">
+                            <button onclick="copyToClipboard('${link}')" class="bg-blue-500 hover:bg-blue-600 py-2 rounded-lg text-sm font-bold">Copy Config</button>
+                            <button onclick="showQR('${link}')" class="bg-slate-700 hover:bg-slate-600 py-2 rounded-lg text-sm">Show QR</button>
+                        </div>
+                    </div>
+                `);
+            }
+        </script>
+
+        <script>
+            // ใส่ Link ของคุณที่นี่
+            createConfigCard("Server 1 (V2Box)", "VLESS", "vless://...");
+            createConfigCard("Server 2 (NetMod)", "VMESS", "vmess://...");
+            createConfigCard("Server 3 (V2Box)", "VLESS", "vless://...");
+            createConfigCard("Server 4 (NetMod)", "VMESS", "vmess://...");
+        </script>
 
     </div>
 
-    <div id="qr-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-800 p-6 rounded-2xl text-center">
-            <h3 class="text-lg font-bold mb-4">สแกนเพื่อใช้งาน</h3>
-            <div id="qrcode" class="flex justify-center mb-4"></div>
-            <button onclick="closeModal()" class="bg-red-500 w-full py-2 rounded-lg font-bold">ปิด</button>
+    <!-- Modal -->
+    <div id="qr-modal" class="fixed inset-0 bg-black bg-opacity-80 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-800 p-6 rounded-2xl text-center border border-slate-700">
+            <h3 class="mb-4 font-bold">สแกน QR Code</h3>
+            <div id="qrcode" class="flex justify-center bg-white p-2"></div>
+            <button onclick="closeModal()" class="mt-4 bg-red-500 px-8 py-2 rounded-lg">ปิด</button>
         </div>
     </div>
 
     <script>
-        // ฟังก์ชันคัดลอก
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text);
-            alert("คัดลอก Config แล้ว!");
+            alert("คัดลอก Config เรียบร้อย!");
         }
 
-        // ฟังก์ชันแสดง QR
         function showQR(text) {
             document.getElementById('qr-modal').classList.remove('hidden');
-            document.getElementById('qrcode').innerHTML = ""; // ล้างค่าเก่า
-            new QRCode(document.getElementById("qrcode"), {
-                text: text,
-                width: 200,
-                height: 200
-            });
+            document.getElementById('qrcode').innerHTML = "";
+            new QRCode(document.getElementById("qrcode"), { text: text, width: 200, height: 200 });
         }
 
-        // ปิด Modal
         function closeModal() {
             document.getElementById('qr-modal').classList.add('hidden');
         }
