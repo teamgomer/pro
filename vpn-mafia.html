@@ -5,35 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Config Panel</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body class="bg-slate-900 text-white min-h-screen p-6">
 
-    <h1 class="text-3xl font-bold text-center mb-10 text-blue-400">Config Manager</h1>
+    <h1 class="text-3xl font-bold text-center mb-10 text-blue-400">Config ชุดที่ 244</h1>
 
-    <!-- Grid 4 Config -->
     <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        <!-- ทำซ้ำส่วนนี้ 4 ครั้ง -->
         <script>
-            function createConfigCard(name, type, link) {
+            function createCard(title, app, imgSrc) {
                 document.write(`
                     <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-blue-600 px-3 py-1 rounded-full text-xs font-bold">${type}</span>
-                            <span class="text-sm font-semibold">${name}</span>
+                        <div class="mb-4">
+                            <span class="bg-blue-600 px-3 py-1 rounded-full text-xs font-bold uppercase">${app}</span>
+                            <h2 class="text-xl font-bold mt-2">${title}</h2>
                         </div>
-                        <div class="grid grid-cols-2 gap-2 mt-4">
-                            <button onclick="copyToClipboard('${link}')" class="bg-blue-500 hover:bg-blue-600 py-2 rounded-lg text-sm font-bold">Copy Config</button>
-                            <button onclick="showQR('${link}')" class="bg-slate-700 hover:bg-slate-600 py-2 rounded-lg text-sm">Show QR</button>
-                        </div>
+                        <img src="${imgSrc}" alt="${title}" class="w-full h-auto rounded-lg mb-4 border-2 border-slate-700">
+                        <p class="text-slate-400 text-sm italic text-center">ใช้สำหรับแอป ${app}</p>
                     </div>
                 `);
             }
         </script>
 
         <script>
-            // ใส่ Link ของคุณที่นี่
+            // ใส่ชื่อไฟล์รูปภาพที่คุณอัปโหลดไว้ใน Folder เดียวกันกับ index.html
+            createCard("AIS โปร 64K 128K", "V2BOX", "14392.jpg");
+            createCard("TRUE โปร ZOOM", "V2BOX", "14393.jpg");
+            createCard("DTAC โปร GAMING", "NETMOD", "14396.jpg");
+            createCard("TRUE โปร TWITTER & IG", "NETMOD", "14397.jpg");
+        </script>
+
+    </div>
+
+</body>
+</html>
             createConfigCard("Server 1 (V2Box)", "VLESS", "vless://...");
             createConfigCard("Server 2 (NetMod)", "VMESS", "vmess://...");
             createConfigCard("Server 3 (V2Box)", "VLESS", "vless://...");
