@@ -13,24 +13,14 @@
     <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
         
         <script>
-            // 1. ฟังก์ชันคัดลอก Config
+            // ฟังก์ชันคัดลอก Config
             function copyToClipboard(text) {
                 navigator.clipboard.writeText(text).then(() => {
                     alert("คัดลอก Config เรียบร้อยแล้ว!");
                 });
             }
 
-            // 2. ฟังก์ชันดาวน์โหลดไฟล์ Config
-            function downloadConfigFile(content, filename) {
-                const blob = new Blob([content], { type: 'text/plain' });
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = filename;
-                a.click();
-            }
-
-            // 3. ฟังก์ชันดาวน์โหลดรูป QR
+            // ฟังก์ชันดาวน์โหลดรูป QR
             async function downloadImage(imageSrc, name) {
                 const response = await fetch(imageSrc);
                 const blob = await response.blob();
@@ -38,10 +28,12 @@
                 const a = document.createElement('a');
                 a.href = url;
                 a.download = name + ".jpg";
+                document.body.appendChild(a);
                 a.click();
+                document.body.removeChild(a);
             }
 
-            // 4. ฟังก์ชันสร้าง Card
+            // ฟังก์ชันสร้าง Card (ปรับปรุง: ลบปุ่ม .txt ออกแล้ว)
             function createCard(title, app, imgSrc, appLink, configContent) {
                 document.write(`
                     <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl hover:border-blue-500 transition-all">
@@ -54,7 +46,6 @@
                         <div class="flex flex-col gap-2">
                             <button onclick="copyToClipboard(\`${configContent}\`)" class="w-full bg-emerald-600 hover:bg-emerald-700 py-2 rounded-lg text-sm font-bold transition">คัดลอก Config</button>
                             <button onclick="downloadImage('${imgSrc}', '${title}')" class="w-full bg-slate-700 hover:bg-slate-600 py-2 rounded-lg text-sm font-bold transition">บันทึก QR Code</button>
-                            <button onclick="downloadConfigFile(\`${configContent}\`, '${title}.txt')" class="w-full bg-indigo-600 hover:bg-indigo-700 py-2 rounded-lg text-sm font-bold transition">บันทึกไฟล์ Config (.txt)</button>
                             <a href="${appLink}" target="_blank" class="w-full bg-blue-500 hover:bg-blue-700 py-2 rounded-lg text-sm font-bold text-center transition">ดาวน์โหลดแอป ${app}</a>
                         </div>
                     </div>
