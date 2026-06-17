@@ -13,7 +13,21 @@
     <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
         
         <script>
-            function createCard(title, app, imgSrc) {
+            // ฟังก์ชันดาวน์โหลดรูป
+            async function downloadImage(imageSrc, name) {
+                const response = await fetch(imageSrc);
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = name + ".jpg";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
+
+            // ฟังก์ชันสร้าง Card พร้อมลิงก์ดาวน์โหลดแอป
+            function createCard(title, app, imgSrc, appLink) {
                 document.write(`
                     <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl hover:border-blue-500 transition-all">
                         <div class="mb-4">
@@ -21,17 +35,30 @@
                             <h2 class="text-xl font-bold mt-2">${title}</h2>
                         </div>
                         <img src="${imgSrc}" alt="${title}" class="w-full h-auto rounded-lg mb-4 border-2 border-slate-700">
-                        <p class="text-slate-400 text-sm text-center">สแกนเพื่อใช้งานกับแอป ${app}</p>
+                        
+                        <div class="flex flex-col gap-2">
+                            <button onclick="downloadImage('${imgSrc}', '${title}')" 
+                                    class="w-full bg-slate-700 hover:bg-emerald-600 py-2 rounded-lg text-sm font-bold transition">
+                                บันทึก QR Code
+                            </button>
+                            <a href="${appLink}" target="_blank" 
+                               class="w-full bg-blue-500 hover:bg-blue-700 py-2 rounded-lg text-sm font-bold text-center transition">
+                                ดาวน์โหลดแอป ${app} (Play Store)
+                            </a>
+                        </div>
                     </div>
                 `);
             }
         </script>
 
         <script>
-            createCard("AIS โปร 64K 128K", "V2BOX", "https://img1.pic.in.th/images/14392.jpg");
-            createCard("TRUE โปร ZOOM", "V2BOX", "https://img2.pic.in.th/14393.jpg");
-            createCard("DTAC โปร GAMING", "NETMOD", "https://img2.pic.in.th/14396.jpg");
-            createCard("TRUE โปร TWITTER & IG", "NETMOD", "https://img1.pic.in.th/images/14397.jpg");
+            const v2boxLink = "https://play.google.com/store/apps/details?id=dev.hexasoftware.v2box";
+            const netmodLink = "https://play.google.com/store/apps/details?id=com.netmod.syna";
+
+            createCard("AIS โปร 64K 128K", "V2BOX", "https://img1.pic.in.th/images/14392.jpg", v2boxLink);
+            createCard("TRUE โปร ZOOM", "V2BOX", "https://img2.pic.in.th/14393.jpg", v2boxLink);
+            createCard("DTAC โปร GAMING", "NETMOD", "https://img2.pic.in.th/14396.jpg", netmodLink);
+            createCard("TRUE โปร TWITTER & IG", "NETMOD", "https://img1.pic.in.th/images/14397.jpg", netmodLink);
         </script>
 
     </div>
