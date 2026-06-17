@@ -39,38 +39,3 @@
 
 </body>
 </html>
-            createConfigCard("Server 1 (V2Box)", "VLESS", "vless://...");
-            createConfigCard("Server 2 (NetMod)", "VMESS", "vmess://...");
-            createConfigCard("Server 3 (V2Box)", "VLESS", "vless://...");
-            createConfigCard("Server 4 (NetMod)", "VMESS", "vmess://...");
-        </script>
-
-    </div>
-
-    <!-- Modal -->
-    <div id="qr-modal" class="fixed inset-0 bg-black bg-opacity-80 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-800 p-6 rounded-2xl text-center border border-slate-700">
-            <h3 class="mb-4 font-bold">สแกน QR Code</h3>
-            <div id="qrcode" class="flex justify-center bg-white p-2"></div>
-            <button onclick="closeModal()" class="mt-4 bg-red-500 px-8 py-2 rounded-lg">ปิด</button>
-        </div>
-    </div>
-
-    <script>
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text);
-            alert("คัดลอก Config เรียบร้อย!");
-        }
-
-        function showQR(text) {
-            document.getElementById('qr-modal').classList.remove('hidden');
-            document.getElementById('qrcode').innerHTML = "";
-            new QRCode(document.getElementById("qrcode"), { text: text, width: 200, height: 200 });
-        }
-
-        function closeModal() {
-            document.getElementById('qr-modal').classList.add('hidden');
-        }
-    </script>
-</body>
-</html>
