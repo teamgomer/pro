@@ -6,10 +6,21 @@
     <title>Config Panel - ชุดที่ 244</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Canvas สำหรับ Particle */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
         .glass-card { background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
     </style>
 </head>
 <body class="bg-[#0f172a] text-white min-h-screen p-6 font-sans">
+
+    <canvas id="particle-canvas"></canvas>
 
     <header class="text-center py-12">
         <h1 class="text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
@@ -18,13 +29,10 @@
         <p class="text-slate-400 mt-3 text-lg">อัปเดตชุดที่ 244 - เลือกใช้งานได้ตามสไตล์คุณ</p>
     </header>
 
-    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8" id="config-container">
-        </div>
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8" id="config-container"></div>
 
     <section class="max-w-3xl mx-auto mt-16 p-8 rounded-3xl glass-card text-center shadow-2xl">
         <h2 class="text-2xl font-bold mb-6 text-emerald-400">🤝 สนับสนุนผลงาน</h2>
-        <p class="text-slate-400 mb-8">หากคุณชอบ Config ของเรา สามารถร่วมสนับสนุนเป็นค่า Server ได้ที่ช่องทางด้านล่างนี้ครับ ขอบคุณครับ!</p>
-        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="bg-slate-900/50 p-5 rounded-2xl border border-slate-700">
                 <p class="text-lg font-bold text-blue-400">🏦 กสิกรไทย</p>
@@ -39,20 +47,30 @@
         </div>
     </section>
 
-    <footer class="text-center mt-12 text-slate-500 text-sm pb-10">
-        © 2026 MLD-SHOP | Config Service
-    </footer>
-
     <script>
-        // (ฟังก์ชันการทำงานเหมือนเดิม - นำมาต่อจากโค้ดเดิมได้เลยครับ)
+        // --- Particle Script ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.onresize = resize; resize();
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() { this.x = Math.random()*canvas.width; this.y = Math.random()*canvas.height; this.size = Math.random()*3+1; this.speedX = Math.random()*0.5-0.25; this.speedY = Math.random()*0.5-0.25; }
+            update() { this.x += this.speedX; this.y += this.speedY; if(this.x<0||this.x>canvas.width||this.y<0||this.y>canvas.height) this.reset(); }
+            draw() { ctx.fillStyle = 'rgba(255,255,255,0.3)'; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); }
+        }
+        for(let i=0; i<60; i++) particles.push(new Particle());
+        function animate() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{p.update(); p.draw();}); requestAnimationFrame(animate); }
+        animate();
+
+        // --- ฟังก์ชันเดิม ---
         function copyToClipboard(text) { navigator.clipboard.writeText(text).then(() => alert("คัดลอก Config เรียบร้อย!")); }
         async function downloadImage(imageSrc, name) {
-            const response = await fetch(imageSrc);
-            const blob = await response.blob();
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url; a.download = name + ".jpg";
-            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            const response = await fetch(imageSrc); const blob = await response.blob(); const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a'); a.href = url; a.download = name + ".jpg"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }
 
         function createCard(title, app, imgSrc, appLink, configContent) {
@@ -60,9 +78,7 @@
             const card = document.createElement('div');
             card.className = "glass-card p-6 rounded-3xl shadow-2xl hover:scale-[1.02] transition-transform duration-300";
             card.innerHTML = `
-                <div class="flex justify-between items-start mb-6">
-                    <span class="bg-blue-500/20 text-blue-400 border border-blue-500/30 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">${app}</span>
-                </div>
+                <div class="flex justify-between items-start mb-6"><span class="bg-blue-500/20 text-blue-400 border border-blue-500/30 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">${app}</span></div>
                 <h2 class="text-2xl font-bold mb-4">${title}</h2>
                 <img src="${imgSrc}" alt="${title}" class="w-full h-auto rounded-2xl mb-6 border border-slate-700 shadow-inner">
                 <div class="flex flex-col gap-3">
@@ -74,7 +90,6 @@
             container.appendChild(card);
         }
 
-        // ใส่ข้อมูลของคุณตรงนี้
         const v2boxLink = "https://play.google.com/store/apps/details?id=dev.hexasoftware.v2box";
         const netmodLink = "https://play.google.com/store/apps/details?id=com.netmod.syna";
 
