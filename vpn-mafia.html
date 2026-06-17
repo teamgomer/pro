@@ -3,45 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VPN Status Checker</title>
-    <style>
-        body { font-family: 'Kanit', sans-serif; background: #0f172a; color: white; display: flex; justify-content: center; padding: 20px; }
-        .card { background: #1e293b; padding: 25px; border-radius: 16px; width: 100%; max-width: 450px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); }
-        h2 { text-align: center; color: #38bdf8; }
-        textarea { width: 100%; height: 120px; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 8px; padding: 12px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: #0284c7; color: white; border: none; border-radius: 8px; margin-top: 15px; cursor: pointer; font-weight: bold; }
-        .result { margin-top: 20px; padding: 15px; border-radius: 8px; display: none; background: #334155; }
-    </style>
+    <title>Free Config V2Ray</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
-<body>
+<body class="bg-slate-900 text-white min-h-screen p-4">
 
-<div class="card">
-    <h2>ตรวจสอบวันหมดอายุ</h2>
-    <textarea id="config" placeholder="วางลิงก์ VLESS/VMESS/V2Ray ที่นี่..."></textarea>
-    <button onclick="check()">ตรวจสอบสถานะ</button>
-    
-    <div id="result" class="result">
-        <p>สถานะ: <span id="status"></span></p>
-        <p>หมดอายุวันที่: <span id="exp"></span></p>
-        <p>เหลือเวลา: <span id="days"></span></p>
-    </div>
-</div>
+    <header class="text-center py-10">
+        <h1 class="text-4xl font-bold text-blue-400">Free V2Ray Config</h1>
+    </header>
 
-<script>
-    function check() {
-        const input = document.getElementById('config').value;
-        const resDiv = document.getElementById('result');
+    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4" id="config-container">
         
-        // นี่คือ Logic พื้นฐานในการตรวจ
-        if(input.includes("vmess://") || input.includes("vless://")) {
-            resDiv.style.display = "block";
-            document.getElementById('status').innerText = "ใช้งานได้";
-            document.getElementById('exp').innerText = "16/07/2026"; // ตัวอย่างข้อมูล
-            document.getElementById('days').innerText = "30 วัน";
-        } else {
-            alert("ลิงก์ไม่ถูกต้อง!");
+        <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 shadow-lg">
+            <div class="flex justify-between mb-4">
+                <span class="bg-blue-600 px-3 py-1 rounded-full text-xs font-bold">VLESS</span>
+                <span class="text-sm">🇹🇭 Thailand</span>
+            </div>
+            <p class="text-slate-400 text-sm mb-4">Ping: 25ms | Exp: 30 Days</p>
+            <div class="flex gap-2">
+                <button onclick="copyToClipboard('vless://your-config-link')" class="flex-1 bg-blue-500 hover:bg-blue-600 py-2 rounded-lg text-sm font-bold transition">Copy</button>
+                <button onclick="showQR('vless://your-config-link')" class="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg text-sm transition">QR Code</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="qr-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-800 p-6 rounded-2xl text-center">
+            <h3 class="text-lg font-bold mb-4">สแกนเพื่อใช้งาน</h3>
+            <div id="qrcode" class="flex justify-center mb-4"></div>
+            <button onclick="closeModal()" class="bg-red-500 w-full py-2 rounded-lg font-bold">ปิด</button>
+        </div>
+    </div>
+
+    <script>
+        // ฟังก์ชันคัดลอก
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text);
+            alert("คัดลอก Config แล้ว!");
         }
-    }
-</script>
+
+        // ฟังก์ชันแสดง QR
+        function showQR(text) {
+            document.getElementById('qr-modal').classList.remove('hidden');
+            document.getElementById('qrcode').innerHTML = ""; // ล้างค่าเก่า
+            new QRCode(document.getElementById("qrcode"), {
+                text: text,
+                width: 200,
+                height: 200
+            });
+        }
+
+        // ปิด Modal
+        function closeModal() {
+            document.getElementById('qr-modal').classList.add('hidden');
+        }
+    </script>
 </body>
 </html>
