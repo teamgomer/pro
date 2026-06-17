@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Config Panel - Premium Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* เพิ่มความเนียนให้กับการ์ด */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-[#0f172a] text-white min-h-screen p-6 font-sans">
+
+    <header class="text-center py-12">
+        <h1 class="text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
+            CONFIG PREMIUM
+        </h1>
+        <p class="text-slate-400 mt-3 text-lg">อัปเดตชุดที่ 244 - เลือกใช้งานได้ตามสไตล์คุณ</p>
+    </header>
+
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8" id="config-container">
+        </div>
+
+    <script>
+        // ฟังก์ชันต่างๆ
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert("คัดลอก Config เรียบร้อย!");
+            });
+        }
+
+        async function downloadImage(imageSrc, name) {
+            const response = await fetch(imageSrc);
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = name + ".jpg";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        // ฟังก์ชันสร้าง Card แบบสวยงาม
+        function createCard(title, app, imgSrc, appLink, configContent) {
+            const container = document.getElementById('config-container');
+            const card = document.createElement('div');
+            card.className = "glass-card p-6 rounded-3xl shadow-2xl hover:scale-[1.02] transition-transform duration-300";
+            
+            card.innerHTML = `
+                <div class="flex justify-between items-start mb-6">
+                    <span class="bg-blue-500/20 text-blue-400 border border-blue-500/30 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">${app}</span>
+                    <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                </div>
+                <h2 class="text-2xl font-bold mb-4">${title}</h2>
+                <img src="${imgSrc}" alt="${title}" class="w-full h-auto rounded-2xl mb-6 border border-slate-700 shadow-inner">
+                
+                <div class="grid grid-cols-1 gap-3">
+                    <button onclick="copyToClipboard(\`${configContent}\`)" class="w-full bg-white text-slate-900 hover:bg-slate-200 py-3 rounded-xl text-sm font-bold transition">คัดลอก Config</button>
+                    <button onclick="downloadImage('${imgSrc}', '${title}')" class="w-full bg-slate-700/50 hover:bg-slate-600 py-3 rounded-xl text-sm font-bold transition">บันทึก QR Code</button>
+                    <a href="${appLink}" target="_blank" class="w-full border border-slate-600 hover:bg-slate-800 py-3 rounded-xl text-sm font-bold text-center transition">ดาวน์โหลดแอป ${app}</a>
+                </div>
+            `;
+            container.appendChild(card);
+        }
+
+        // ข้อมูล
+        const v2boxLink = "https://play.google.com/store/apps/details?id=dev.hexasoftware.v2box";
+        const netmodLink = "https://play.google.com/store/apps/details?id=com.netmod.syna";
+
+        createCard("AIS โปร 64K 128K", "V2BOX", "https://img1.pic.in.th/images/14392.jpg", v2boxLink, "vmess://...");
+        createCard("TRUE โปร ZOOM", "V2BOX", "https://img2.pic.in.th/14393.jpg", v2boxLink, "vmess://...");
+        createCard("DTAC โปร GAMING", "NETMOD", "https://img2.pic.in.th/14396.jpg", netmodLink, "nm-ssh://...");
+        createCard("TRUE โปร TWITTER & IG", "NETMOD", "https://img1.pic.in.th/images/14397.jpg", netmodLink, "nm-ssh://...");
+    </script>
+</body>
+</html>
