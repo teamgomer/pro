@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLD-SHOP | VPN Service</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
+</head>
+<body class="bg-[#0f172a] text-white p-6 font-sans">
+    <canvas id="particle-canvas"></canvas>
+
+    <h1 class="text-4xl font-bold text-center my-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">MLD-SHOP VPN</h1>
+
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8" id="shop-container">
+        </div>
+
+    <div class="text-center mt-16">
+        <a href="ลิงก์_GOOGLE_FORM_ของคุณ" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 py-4 px-10 rounded-full font-bold text-lg shadow-xl animate-pulse">
+            แจ้งโอนเงินและรับไฟล์
+        </a>
+    </div>
+
+    <script>
+        // ใส่ลิงก์ CSV จาก Google Sheets ของคุณที่นี่
+        const csvUrl = 'ลิงก์_CSV_จาก_GOOGLE_SHEETS_ของคุณ';
+
+        fetch(csvUrl)
+            .then(res => res.text())
+            .then(data => {
+                const rows = data.split('\n').slice(1);
+                const container = document.getElementById('shop-container');
+                rows.forEach(row => {
+                    const [title, app, imgSrc, appLink, config] = row.split(',');
+                    if(!title) return;
+                    container.innerHTML += `
+                        <div class="glass-card p-6 rounded-3xl">
+                            <span class="bg-blue-600 px-3 py-1 rounded-full text-xs">${app}</span>
+                            <h2 class="text-xl font-bold mt-2">${title}</h2>
+                            <img src="${imgSrc}" class="w-full h-48 object-cover rounded-xl my-4">
+                            <div class="flex gap-2">
+                                <button onclick="navigator.clipboard.writeText('${config}').then(()=>alert('คัดลอกแล้ว!'))" class="w-full bg-white text-black py-2 rounded-lg font-bold">คัดลอก Config</button>
+                                <a href="${appLink}" class="w-full bg-slate-700 py-2 rounded-lg text-center">โหลดแอป</a>
+                            </div>
+                        </div>
+                    `;
+                });
+            });
+
+        // ระบบ Particle พื้นหลัง
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.onresize = resize; resize();
+        class P { constructor() { this.x = Math.random()*canvas.width; this.y = Math.random()*canvas.height; } draw() { ctx.fillStyle = 'rgba(255,255,255,0.2)'; ctx.beginPath(); ctx.arc(this.x,this.y,2,0,Math.PI*2); ctx.fill(); } }
+        let ps = Array.from({length: 50}, () => new P());
+        function anim() { ctx.clearRect(0,0,canvas.width,canvas.height); ps.forEach(p => p.draw()); requestAnimationFrame(anim); }
+        anim();
+    </script>
+</body>
+</html>
