@@ -67,6 +67,20 @@
         }
         .instruction h3 { color: var(--primary); margin-top: 0; }
         .instruction ol { padding-left: 20px; }
+        
+        /* สไตล์สำหรับปุ่มลิงค์ร้าน */
+        .btn-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 20px;
+            background-color: #27ae60;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .btn-link:hover { background-color: #219150; }
     </style>
 </head>
 <body>
@@ -88,10 +102,13 @@
     <div class="instruction">
         <h3>ขั้นตอนการเข้าเช็ควันหมดอายุ</h3>
         <ol>
-            <li>ให้กดตรง <b>ประวัติการซื้อ</b></li>
+            <li>ให้กดปุ่ม <b>"ไปที่ประวัติการซื้อ"</b> ด้านล่างนี้</li>
             <li>ให้ดูบริเวณ <b>ดูข้อมูลไฟล์</b> จะมีวันที่ระบุอยู่ ให้นำมากรอกตรง <b>วันเริ่มใช้งาน</b></li>
             <li>จำนวนวัน ให้ระบุตามระยะเวลาที่ซื้อ (เช่น 30 วัน, 90 วัน เป็นต้น)</li>
         </ol>
+        <div style="text-align: center;">
+            <a href="https://mldshop.rexzy.xyz/profile/history/shop" target="_blank" class="btn-link">ไปที่ประวัติการซื้อ</a>
+        </div>
     </div>
 </div>
 
@@ -108,9 +125,7 @@
         const startDate = new Date(startInput);
         let expiryDate = new Date(startInput);
         
-        // บวกจำนวนวันเข้าไปในวันที่เริ่มต้น
         expiryDate.setDate(expiryDate.getDate() + daysToAdd);
-        // ลบออก 1 วินาที เพื่อให้เป็นเวลาสิ้นสุดวัน
         expiryDate.setSeconds(expiryDate.getSeconds() - 1);
 
         const options = { 
