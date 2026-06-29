@@ -2,30 +2,70 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <title>MLD SHOP - Dino Expiry Tracker</title>
+    <title>MLD SHOP - Expiry Tracker</title>
     <style>
-        :root { --dino-green: #5d8e5e; --dino-earth: #8b5e3c; --dino-light: #f4ece0; }
-        body { font-family: 'Comic Sans MS', cursive; background: linear-gradient(135deg, #2d5a27, #5d8e5e); min-height: 100vh; padding: 20px; color: #3e2723; display: flex; flex-direction: column; align-items: center; }
-        .container { max-width: 450px; width: 100%; }
-        .card { background: var(--dino-light); padding: 25px; border-radius: 20px; border: 5px solid var(--dino-earth); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
-        h2 { text-align: center; color: var(--dino-earth); margin-bottom: 20px; }
-        label { font-weight: bold; color: var(--dino-earth); }
-        input { width: 100%; padding: 12px; margin: 8px 0 15px 0; border: 2px solid var(--dino-earth); border-radius: 10px; box-sizing: border-box; background: #fffcf8; }
-        button { width: 100%; padding: 12px; background: var(--dino-earth); color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: bold; }
-        button:hover { background: #6d4a2e; }
-        .footer-img { text-align: center; margin-top: 25px; }
-        .footer-img img { max-width: 100%; height: auto; border-radius: 10px; }
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap');
+
+        :root {
+            --primary: #4a90e2;
+            --secondary: #50e3c2;
+            --bg: #f8f9fa;
+            --text: #333;
+            --card-bg: #ffffff;
+        }
+
+        body { 
+            font-family: 'Prompt', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text);
+            display: flex; flex-direction: column; align-items: center; 
+            min-height: 100vh; margin: 0; padding: 20px;
+        }
+
+        .container { max-width: 400px; width: 100%; }
+
+        .card { 
+            background: var(--card-bg); 
+            padding: 30px; 
+            border-radius: 24px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+
+        h2 { text-align: center; color: var(--primary); margin-bottom: 25px; font-weight: 600; }
+
+        label { font-size: 0.9em; color: #666; margin-bottom: 8px; display: block; }
+
+        input { 
+            width: 100%; padding: 14px; margin-bottom: 20px; 
+            border: 2px solid #f0f0f0; border-radius: 12px; 
+            box-sizing: border-box; font-size: 16px; transition: 0.3s;
+        }
+        input:focus { border-color: var(--primary); outline: none; background: #fff; }
+
+        button { 
+            width: 100%; padding: 15px; background: var(--primary); 
+            color: white; border: none; border-radius: 12px; 
+            cursor: pointer; font-size: 16px; font-weight: 600; transition: 0.3s;
+        }
+        button:hover { background: #357abd; transform: translateY(-2px); }
+
+        .footer-img { text-align: center; margin-top: 30px; }
+        .footer-img img { max-width: 150px; opacity: 0.8; transition: 0.3s; }
+        .footer-img img:hover { opacity: 1; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="card">
-        <h2>MLD SHOP 🦕</h2>
-        <label>วันที่และเวลาเริ่มต้น:</label>
+        <h2>MLD SHOP</h2>
+        <label>วันที่และเวลาเริ่มต้น</label>
         <input type="datetime-local" id="startDateTime">
-        <label>จำนวนเดือนที่ใช้งาน:</label>
-        <input type="number" id="months" placeholder="ระบุจำนวนเดือน...">
+        
+        <label>จำนวนเดือนที่ใช้งาน</label>
+        <input type="number" id="months" placeholder="ระบุตัวเลข (เดือน)">
+        
         <button onclick="calculateExpiry()">คำนวณวันหมดอายุ</button>
     </div>
 
@@ -42,7 +82,7 @@
         const monthsToAdd = parseInt(document.getElementById('months').value);
         
         if (!startInput || isNaN(monthsToAdd)) {
-            alert("กรุณากรอกวันที่และจำนวนเดือนให้ครบถ้วนครับ!");
+            alert("กรุณากรอกข้อมูลให้ครบถ้วนครับ");
             return;
         }
 
@@ -56,10 +96,8 @@
             hour: '2-digit', minute: '2-digit', second: '2-digit' 
         };
         
-        const startStr = startDate.toLocaleString('th-TH', options);
-        const expiryStr = expiryDate.toLocaleString('th-TH', options);
-
-        alert("วันที่เริ่มใช้งาน:\n" + startStr + "\n\nวันหมดอายุ:\n" + expiryStr);
+        alert("🗓️ วันที่เริ่มใช้งาน:\n" + startDate.toLocaleString('th-TH', options) + 
+              "\n\n⏳ วันหมดอายุ:\n" + expiryDate.toLocaleString('th-TH', options));
     }
 </script>
 
