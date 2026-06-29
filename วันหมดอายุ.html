@@ -31,6 +31,7 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.08);
             border: 1px solid #eee;
             text-align: center;
+            margin-bottom: 30px;
         }
 
         .logo { max-width: 160px; margin-bottom: 25px; }
@@ -53,6 +54,20 @@
             margin-top: 10px;
         }
         button:hover { background: #357abd; transform: translateY(-3px); }
+
+        /* ส่วนของขั้นตอนการใช้งาน */
+        .instruction {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+            border: 1px solid #eee;
+            text-align: left;
+            line-height: 1.8;
+            color: #555;
+        }
+        .instruction h3 { color: var(--primary); margin-top: 0; }
+        .instruction ol { padding-left: 20px; }
     </style>
 </head>
 <body>
@@ -69,6 +84,15 @@
         <input type="number" id="months" placeholder="ระบุตัวเลข (เดือน)">
         
         <button onclick="calculateExpiry()">คำนวณวันหมดอายุ</button>
+    </div>
+
+    <div class="instruction">
+        <h3>ขั้นตอนการเข้าเช็ควันหมดอายุ</h3>
+        <ol>
+            <li>ให้กดตรง <b>ประวัติการซื้อ</b></li>
+            <li>ให้ดูบริเวณ <b>ดูข้อมูลไฟล์</b> จะมีวันที่ระบุอยู่ ให้นำมากรอกตรง <b>วันเริ่มใช้งาน</b></li>
+            <li>จำนวนเดือน ให้ระบุตามจริงที่ซื้อ (เช่น 1, 3, 6 หรือ 12 เดือน)</li>
+        </ol>
     </div>
 </div>
 
