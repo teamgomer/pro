@@ -55,7 +55,6 @@
         }
         button:hover { background: #357abd; transform: translateY(-3px); }
 
-        /* ส่วนของขั้นตอนการใช้งาน */
         .instruction {
             background: #ffffff;
             padding: 30px;
@@ -77,11 +76,11 @@
         <img src="https://img1.pic.in.th/images/18297.png" alt="MLD SHOP Logo" class="logo">
         
         <h2>MLD SHOP</h2>
-        <label>ระบุวันที่และเวลาเริ่มต้น ที่ซื้อบนเว็บไซต์</label>
+        <label>วันที่และเวลาเริ่มต้น</label>
         <input type="datetime-local" id="startDateTime">
         
-        <label>ระบุจำนวนเดือนที่ใช้ซื้อ</label>
-        <input type="number" id="months" placeholder="ระบุตัวเลข (เดือน)">
+        <label>จำนวนวันใช้งาน</label>
+        <input type="number" id="days" placeholder="ระบุจำนวนวัน (เช่น 30, 90, 365)">
         
         <button onclick="calculateExpiry()">คำนวณวันหมดอายุ</button>
     </div>
@@ -91,7 +90,7 @@
         <ol>
             <li>ให้กดตรง <b>ประวัติการซื้อ</b></li>
             <li>ให้ดูบริเวณ <b>ดูข้อมูลไฟล์</b> จะมีวันที่ระบุอยู่ ให้นำมากรอกตรง <b>วันเริ่มใช้งาน</b></li>
-            <li>จำนวนเดือน ให้ระบุตามจริงที่ซื้อ (เช่น 1, 3, 6 หรือ 12 เดือน)</li>
+            <li>จำนวนวัน ให้ระบุตามระยะเวลาที่ซื้อ (เช่น 30 วัน, 90 วัน เป็นต้น)</li>
         </ol>
     </div>
 </div>
@@ -99,16 +98,19 @@
 <script>
     function calculateExpiry() {
         const startInput = document.getElementById('startDateTime').value;
-        const monthsToAdd = parseInt(document.getElementById('months').value);
+        const daysToAdd = parseInt(document.getElementById('days').value);
         
-        if (!startInput || isNaN(monthsToAdd)) {
-            alert("กรุณากรอกข้อมูลให้ครบถ้วนครับ");
+        if (!startInput || isNaN(daysToAdd)) {
+            alert("กรุณากรอกวันที่และจำนวนวันให้ครบถ้วนครับ");
             return;
         }
 
         const startDate = new Date(startInput);
         let expiryDate = new Date(startInput);
-        expiryDate.setMonth(expiryDate.getMonth() + monthsToAdd);
+        
+        // บวกจำนวนวันเข้าไปในวันที่เริ่มต้น
+        expiryDate.setDate(expiryDate.getDate() + daysToAdd);
+        // ลบออก 1 วินาที เพื่อให้เป็นเวลาสิ้นสุดวัน
         expiryDate.setSeconds(expiryDate.getSeconds() - 1);
 
         const options = { 
