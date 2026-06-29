@@ -4,73 +4,53 @@
     <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #4f46e5; --card-bg: #ffffff; }
-        body { font-family: 'Prompt', sans-serif; background-color: #f9fafb; display: flex; justify-content: center; padding: 20px; }
-        .card { background: var(--card-bg); padding: 2rem; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); width: 100%; max-width: 500px; }
-        
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .stat-box { background: #f3f4f6; padding: 15px; border-radius: 12px; text-align: center; }
-        .stat-value { font-size: 1.5rem; font-weight: 600; color: #111827; }
-        .stat-label { font-size: 0.85rem; color: #6b7280; }
-        
-        .main-result { margin-top: 20px; padding: 20px; border-radius: 15px; text-align: center; font-size: 1.2rem; font-weight: 600; }
+        :root { --primary: #4f46e5; }
+        body { font-family: 'Prompt', sans-serif; background-color: #f3f4f6; display: flex; justify-content: center; padding: 20px; }
+        .card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 500px; }
+        .row { display: flex; justify-content: space-between; margin: 20px 0; }
+        .box { background: #f9fafb; padding: 15px; border-radius: 12px; width: 45%; text-align: center; border: 1px solid #e5e7eb; }
+        .label { font-size: 0.75rem; color: #6b7280; text-transform: uppercase; }
+        .value { font-size: 1rem; font-weight: 600; color: #111827; margin-top: 5px; }
+        .time-display { font-size: 0.9rem; color: var(--primary); font-weight: 600; margin-bottom: 10px; }
         input { width: 100%; padding: 12px; margin: 10px 0; border: 1.5px solid #d1d5db; border-radius: 10px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; margin-top: 10px; }
+        button { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; }
+        .status-box { margin-top: 20px; padding: 15px; border-radius: 12px; text-align: center; font-weight: 600; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h3>📊 สรุปข้อมูลวันหมดอายุ</h3>
+    <h3>📅 เช็ควันหมดอายุ (แบบละเอียด)</h3>
+    <div id="currentTime" class="time-display"></div>
     <label>เลือกวันที่เริ่มต้น:</label>
     <input type="date" id="startDate">
-    <button onclick="calculate()">คำนวณวันหมดอายุ</button>
+    <button onclick="calculate()">คำนวณสถานะ</button>
 
-    <div class="grid">
-        <div class="stat-box">
-            <div class="stat-label">วันเริ่มต้น</div>
-            <div id="valStart" class="stat-value">-</div>
+    <div class="row">
+        <div class="box">
+            <div class="label">เริ่มต้น</div>
+            <div id="startInfo" class="value">-</div>
         </div>
-        <div class="stat-box">
-            <div class="stat-label">วันหมดอายุ</div>
-            <div id="valEnd" class="stat-value">-</div>
+        <div class="box">
+            <div class="label">หมดอายุ</div>
+            <div id="endInfo" class="value">-</div>
         </div>
     </div>
-    
-    <div id="finalResult" class="main-result" style="display:none;"></div>
+    <div id="status" class="status-box" style="display:none;"></div>
 </div>
 
 <script>
-    function calculate() {
-        const startInput = document.getElementById('startDate').value;
-        if (!startInput) return alert("กรุณาเลือกวันที่");
-
-        const start = new Date(startInput);
-        const end = new Date(start);
-        end.setDate(start.getDate() + 30); // บวก 30 วันตามโจทย์
-
-        const today = new Date();
-        today.setHours(0,0,0,0);
-        
-        // คำนวณวันคงเหลือ
-        const diffDays = Math.ceil((end - today) / (1000 * 60 * 60 * 24));
-
-        // แสดงผลตัวเลขวันที่
-        document.getElementById('valStart').innerText = start.getDate();
-        document.getElementById('valEnd').innerText = end.getDate();
-
-        // แสดงสถานะด้านล่าง
-        const resDiv = document.getElementById('finalResult');
-        resDiv.style.display = 'block';
-
-        if (diffDays < 0) {
-            resDiv.style.background = '#fee2e2'; resDiv.style.color = '#991b1b';
-            resDiv.innerHTML = `หมดอายุมาแล้ว ${Math.abs(diffDays)} วัน`;
-        } else {
-            resDiv.style.background = '#d1fae5'; resDiv.style.color = '#065f46';
-            resDiv.innerHTML = `เหลือเวลาอีก ${diffDays} วัน`;
-        }
+    // แสดงเวลาปัจจุบันแบบ Real-time
+    function updateClock() {
+        const now = new Date();
+        document.getElementById('currentTime').innerText = "เวลาปัจจุบัน: " + now.toLocaleTimeString('th-TH');
     }
-</script>
-</body>
-</html>
+    setInterval(updateClock, 1000);
+
+    function calculate() {
+        const input = document.getElementById('startDate').value;
+        if (!input) return alert("โปรดเลือกวันที่");
+
+        const start = new Date(input);
+        const end = new Date(start);
+        end.setDate(start.getDate() + 30);
