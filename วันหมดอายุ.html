@@ -22,7 +22,7 @@
             align-items: center;
         }
 
-        .container { max-width: 500px; width: 100%; flex-grow: 1; }
+        .container { max-width: 500px; width: 100%; }
 
         .card { 
             background: var(--card-bg); 
@@ -53,18 +53,6 @@
             margin-top: 10px;
         }
         button:hover { background: #357abd; transform: translateY(-3px); }
-
-        /* จัดให้รูปภาพอยู่ล่างสุดและขนาดปานกลาง */
-        .footer-container { 
-            margin-top: auto; 
-            padding-top: 50px; 
-            text-align: center;
-        }
-        .footer-img { 
-            width: 150px; /* ขนาดปานกลาง */
-            height: auto; 
-            opacity: 0.8;
-        }
     </style>
 </head>
 <body>
@@ -82,13 +70,6 @@
         
         <button onclick="calculateExpiry()">คำนวณวันหมดอายุ</button>
     </div>
-</div>
-
-<!-- ส่วนรูปภาพที่ปรับให้อยู่ล่างสุด -->
-<div class="footer-container">
-    <a href="https://pic.in.th/image/18295.18295" target="_blank">
-        <img src="https://img1.pic.in.th/images/18295.png" alt="18295" class="footer-img">
-    </a>
 </div>
 
 <script>
