@@ -8,7 +8,6 @@
 
         :root {
             --primary: #4a90e2;
-            --secondary: #50e3c2;
             --bg: #f8f9fa;
             --text: #333;
             --card-bg: #ffffff;
@@ -30,11 +29,15 @@
             border-radius: 24px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             border: 1px solid #eee;
+            text-align: center;
         }
 
-        h2 { text-align: center; color: var(--primary); margin-bottom: 25px; font-weight: 600; }
+        /* ปรับแต่งโลโก้ */
+        .logo { max-width: 120px; margin-bottom: 15px; }
 
-        label { font-size: 0.9em; color: #666; margin-bottom: 8px; display: block; }
+        h2 { color: var(--primary); margin-top: 0; margin-bottom: 25px; font-weight: 600; }
+
+        label { font-size: 0.9em; color: #666; margin-bottom: 8px; display: block; text-align: left; }
 
         input { 
             width: 100%; padding: 14px; margin-bottom: 20px; 
@@ -59,6 +62,8 @@
 
 <div class="container">
     <div class="card">
+        <img src="https://img1.pic.in.th/images/18297.png" alt="MLD SHOP Logo" class="logo">
+        
         <h2>MLD SHOP</h2>
         <label>วันที่และเวลาเริ่มต้น</label>
         <input type="datetime-local" id="startDateTime">
