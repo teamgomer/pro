@@ -5,13 +5,16 @@
     <title>MLD SHOP - Dino Expiry Tracker</title>
     <style>
         :root { --dino-green: #5d8e5e; --dino-earth: #8b5e3c; --dino-light: #f4ece0; }
-        body { font-family: 'Comic Sans MS', cursive; background: linear-gradient(135deg, #2d5a27, #5d8e5e); min-height: 100vh; padding: 20px; color: #3e2723; }
-        .container { max-width: 600px; margin: auto; }
-        .card { background: var(--dino-light); padding: 25px; border-radius: 20px; border: 5px solid var(--dino-earth); margin-bottom: 20px; }
-        input { width: 100%; padding: 10px; margin: 5px 0 15px 0; border: 2px solid var(--dino-earth); border-radius: 8px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: var(--dino-earth); color: white; border: none; border-radius: 8px; cursor: pointer; }
-        table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
-        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; font-size: 0.9em; }
+        body { font-family: 'Comic Sans MS', cursive; background: linear-gradient(135deg, #2d5a27, #5d8e5e); min-height: 100vh; padding: 20px; color: #3e2723; display: flex; flex-direction: column; align-items: center; }
+        .container { max-width: 600px; width: 100%; }
+        .card { background: var(--dino-light); padding: 25px; border-radius: 20px; border: 5px solid var(--dino-earth); margin-bottom: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
+        h2, h3 { text-align: center; color: var(--dino-earth); }
+        input { width: 100%; padding: 12px; margin: 8px 0 15px 0; border: 2px solid var(--dino-earth); border-radius: 10px; box-sizing: border-box; background: #fffcf8; }
+        button { width: 100%; padding: 12px; background: var(--dino-earth); color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: bold; }
+        button:hover { background: #6d4a2e; }
+        .table-wrapper { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; margin-top: 10px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 2px solid var(--dino-light); font-size: 0.9em; }
         th { background: var(--dino-earth); color: white; }
     </style>
 </head>
@@ -20,22 +23,23 @@
 <div class="container">
     <div class="card">
         <h2>MLD SHOP 🦕</h2>
-        <label>วันที่และเวลาเริ่มต้น:</label>
+        <label>วันที่เริ่มใช้งาน:</label>
         <input type="datetime-local" id="startDateTime">
         <label>จำนวนเดือนที่ใช้งาน:</label>
         <input type="number" id="months" placeholder="ระบุจำนวนเดือน...">
-        <button onclick="saveAndCalculate()">บันทึกและคำนวณ</button>
+        <button onclick="saveAndCalculate()">คำนวณและบันทึกประวัติ</button>
     </div>
 
     <div class="card">
-        <h3>📜 ประวัติการเช็ควันหมดอายุ</h3>
-        <table id="historyTable">
-            <thead>
-                <tr><th>เริ่มใช้</th><th>หมดอายุ</th></tr>
-            </thead>
-            <tbody id="historyBody"></tbody>
-        </table>
-        <button onclick="clearHistory()" style="background:#c62828; margin-top:10px;">ล้างประวัติ</button>
+        <h3>📜 ประวัติการตรวจสอบไฟล์</h3>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr><th>เริ่มใช้</th><th>หมดอายุ</th></tr>
+                </thead>
+                <tbody id="historyBody"></tbody>
+            </table>
+        </div>
     </div>
 </div>
 
@@ -43,17 +47,26 @@
     function saveAndCalculate() {
         const start = document.getElementById('startDateTime').value;
         const m = parseInt(document.getElementById('months').value);
-        if (!start || !m) return alert("กรอกข้อมูลให้ครบ!");
+        if (!start || !m) return alert("กรุณากรอกข้อมูลให้ครบถ้วนครับ!");
 
         let date = new Date(start);
         date.setMonth(date.getMonth() + m);
         date.setSeconds(date.getSeconds() - 1);
-        const expiry = date.toLocaleString('th-TH');
+
+        // กำหนดรูปแบบวันที่ให้แสดงชื่อเดือนเต็ม
+        const options = { 
+            year: 'numeric', month: 'long', day: 'numeric', 
+            hour: '2-digit', minute: '2-digit', second: '2-digit' 
+        };
+        const expiryFormatted = date.toLocaleString('th-TH', options);
+
+        // แสดงข้อความเด้งเตือน
+        alert("วันหมดอายุคือ: \n" + expiryFormatted);
 
         // บันทึกลง LocalStorage
         let history = JSON.parse(localStorage.getItem('mldHistory') || '[]');
-        history.unshift({ start: start, expiry: expiry });
-        localStorage.setItem('mldHistory', JSON.stringify(history.slice(0, 5))); // เก็บ 5 รายการล่าสุด
+        history.unshift({ start: start.replace('T', ' '), expiry: expiryFormatted });
+        localStorage.setItem('mldHistory', JSON.stringify(history.slice(0, 10)));
         
         renderHistory();
     }
@@ -61,11 +74,10 @@
     function renderHistory() {
         const body = document.getElementById('historyBody');
         const history = JSON.parse(localStorage.getItem('mldHistory') || '[]');
-        body.innerHTML = history.map(item => `<tr><td>${item.start.replace('T', ' ')}</td><td>${item.expiry}</td></tr>`).join('');
+        body.innerHTML = history.map(item => `<tr><td>${item.start}</td><td>${item.expiry}</td></tr>`).join('');
     }
 
     window.onload = renderHistory;
-    function clearHistory() { localStorage.removeItem('mldHistory'); renderHistory(); }
 </script>
 
 </body>
