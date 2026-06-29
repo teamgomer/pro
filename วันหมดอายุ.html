@@ -4,109 +4,71 @@
     <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #4f46e5;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --success: #10b981;
-            --bg: #f3f4f6;
-        }
-
-        body {
-            font-family: 'Prompt', sans-serif;
-            background-color: var(--bg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .card {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        h3 { color: #1f2937; margin-bottom: 1.5rem; }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 1rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
-            box-sizing: border-box;
-            font-size: 1rem;
-            transition: 0.3s;
-        }
-
-        input:focus { border-color: var(--primary); outline: none; }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s, background 0.3s;
-        }
-
-        button:hover { background: #4338ca; transform: translateY(-2px); }
-
-        #result {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            border-radius: 10px;
-            font-weight: 600;
-            display: none;
-        }
+        :root { --primary: #4f46e5; --card-bg: #ffffff; }
+        body { font-family: 'Prompt', sans-serif; background-color: #f9fafb; display: flex; justify-content: center; padding: 20px; }
+        .card { background: var(--card-bg); padding: 2rem; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); width: 100%; max-width: 500px; }
+        
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .stat-box { background: #f3f4f6; padding: 15px; border-radius: 12px; text-align: center; }
+        .stat-value { font-size: 1.5rem; font-weight: 600; color: #111827; }
+        .stat-label { font-size: 0.85rem; color: #6b7280; }
+        
+        .main-result { margin-top: 20px; padding: 20px; border-radius: 15px; text-align: center; font-size: 1.2rem; font-weight: 600; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1.5px solid #d1d5db; border-radius: 10px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h3>📅 เช็ควันหมดอายุไฟล์</h3>
-    <input type="date" id="fileDate">
-    <button onclick="checkExpiration()">ตรวจสอบสถานะ</button>
-    <div id="result"></div>
+    <h3>📊 สรุปข้อมูลวันหมดอายุ</h3>
+    <label>เลือกวันที่เริ่มต้น:</label>
+    <input type="date" id="startDate">
+    <button onclick="calculate()">คำนวณวันหมดอายุ</button>
+
+    <div class="grid">
+        <div class="stat-box">
+            <div class="stat-label">วันเริ่มต้น</div>
+            <div id="valStart" class="stat-value">-</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-label">วันหมดอายุ</div>
+            <div id="valEnd" class="stat-value">-</div>
+        </div>
+    </div>
+    
+    <div id="finalResult" class="main-result" style="display:none;"></div>
 </div>
 
 <script>
-    function checkExpiration() {
-        const inputVal = document.getElementById('fileDate').value;
-        const resultDiv = document.getElementById('result');
-        if (!inputVal) return alert("โปรดเลือกวันที่");
+    function calculate() {
+        const startInput = document.getElementById('startDate').value;
+        if (!startInput) return alert("กรุณาเลือกวันที่");
 
-        const fileDate = new Date(inputVal);
-        fileDate.setHours(0,0,0,0);
+        const start = new Date(startInput);
+        const end = new Date(start);
+        end.setDate(start.getDate() + 30); // บวก 30 วันตามโจทย์
+
         const today = new Date();
         today.setHours(0,0,0,0);
-        const expiryDate = new Date(today);
-        expiryDate.setDate(today.getDate() + 30);
+        
+        // คำนวณวันคงเหลือ
+        const diffDays = Math.ceil((end - today) / (1000 * 60 * 60 * 24));
 
-        resultDiv.style.display = 'block';
+        // แสดงผลตัวเลขวันที่
+        document.getElementById('valStart').innerText = start.getDate();
+        document.getElementById('valEnd').innerText = end.getDate();
 
-        if (fileDate < today) {
-            resultDiv.style.background = '#fee2e2';
-            resultDiv.style.color = '#991b1b';
-            resultDiv.innerHTML = "❌ หมดอายุแล้ว";
-        } else if (fileDate <= expiryDate) {
-            resultDiv.style.background = '#fef3c7';
-            resultDiv.style.color = '#92400e';
-            resultDiv.innerHTML = "⚠️ ใกล้หมดอายุ (ภายใน 30 วัน)";
+        // แสดงสถานะด้านล่าง
+        const resDiv = document.getElementById('finalResult');
+        resDiv.style.display = 'block';
+
+        if (diffDays < 0) {
+            resDiv.style.background = '#fee2e2'; resDiv.style.color = '#991b1b';
+            resDiv.innerHTML = `หมดอายุมาแล้ว ${Math.abs(diffDays)} วัน`;
         } else {
-            resultDiv.style.background = '#d1fae5';
-            resultDiv.style.color = '#065f46';
-            resultDiv.innerHTML = "✅ ยังใช้งานได้ปกติ";
+            resDiv.style.background = '#d1fae5'; resDiv.style.color = '#065f46';
+            resDiv.innerHTML = `เหลือเวลาอีก ${diffDays} วัน`;
         }
     }
 </script>
