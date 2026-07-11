@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Config Panel - DARK TUNNEL</title>
+    <title>Config Panel - Multi-Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { background-color: #0f172a; }
@@ -12,52 +12,41 @@
 </head>
 <body class="text-white min-h-screen p-4 md:p-10 font-sans">
 
-    <div class="max-w-4xl mx-auto">
-        <!-- Header -->
-        <div class="text-center mb-10">
-            <h1 class="text-4xl font-extrabold text-blue-400 mb-2">DARK TUNNEL Config</h1>
-            <p class="text-slate-400">ชุด Config แรงๆ อัปเดตใหม่ล่าสุด</p>
-        </div>
+    <div class="max-w-5xl mx-auto">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-extrabold text-blue-400 mb-2">VPN CONFIG PANEL</h1>
+            <p class="text-slate-400">เลือกใช้งานตามระบบปฏิบัติการของคุณ</p>
+        </header>
 
-        <!-- App Download -->
-        <div class="flex justify-center mb-10">
-            <a href="https://play.google.com/store/apps/details?id=net.darktunnel.app" 
-               target="_blank"
-               class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105">
-                📥 ดาวน์โหลดแอป DARK TUNNEL
-            </a>
-        </div>
-
-        <!-- Config Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            <div class="glass-card p-6 rounded-3xl shadow-xl">
-                <span class="bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full text-xs font-bold uppercase">Version 1</span>
-                <h2 class="text-xl font-bold mt-4 mb-4">AIS SSH V.1 ⚡</h2>
-                <button onclick="copyConfig('darktunnel://eyJ0eXBlIjoiU1NIIiwibmFtZSI6IkFJUyBTU0ggVi4xIPCfmIEiLCJzc2hUdW5uZWxDb25maWciOnsic3NoQ29uZmlnIjp7Imhvc3QiOiJ2aXAyLmJ1Z2hvc3Quc2l0ZSIsInVzZXJuYW1lIjoiYW0xMTExIiwicGFzc3dvcmQiOiJhbTExMTEifSwiaW5qZWN0Q29uZmlnIjp7Im1vZGUiOiJQUk9YWSIsInByb3h5SG9zdCI6IjEwNC4xOC40LjUwIiwicHJveHlQb3J0Ijo4ODgwLCJwYXlsb2FkIjoiR0VUIC8gSFRUUC8xLjFbY3JsZl1Ib3N0OiB3d3cuYWlzLnRoW2NybGZdW2NybGZdW3NwbGl0XVBBVENIIC8gSFRUUC8xLjFbY3JsZl1Ib3N0OiBbaG9zdF1bY3JsZl1VcGdyYWRlOiB3ZWJzb2NrZXRbY3JsZl1Vc2VyLUFnZW50OiBbdWFdW2NybGZdW2NybGZdIn19fQ==')" 
-                        class="w-full bg-white text-slate-900 font-bold py-3 rounded-xl hover:bg-slate-200 transition">คัดลอก Config V.1</button>
+        <!-- แถบเลือก OS -->
+        <div class="grid md:grid-cols-2 gap-10">
+            
+            <!-- Android Section -->
+            <div>
+                <h2 class="text-2xl font-bold mb-6 text-emerald-400 flex items-center">🤖 Android (DARK TUNNEL)</h2>
+                <div class="space-y-4 mb-6">
+                    <button onclick="copyConfig('darktunnel://eyJ0eXBlIjoiU1NIIiwibmFtZSI6IkFJUyBTU0ggVi4xIPCfmIEiLCJzc2hUdW5uZWxDb25maWciOnsic3NoQ29uZmlnIjp7Imhvc3QiOiJ2aXAyLmJ1Z2hvc3Quc2l0ZSIsInVzZXJuYW1lIjoiYW0xMTExIiwicGFzc3dvcmQiOiJhbTExMTEifSwiaW5qZWN0Q29uZmlnIjp7Im1vZGUiOiJQUk9YWSIsInByb3h5SG9zdCI6IjEwNC4xOC40LjUwIiwicHJveHlQb3J0Ijo4ODgwLCJwYXlsb2FkIjoiR0VUIC8gSFRUUC8xLjFbY3JsZl1Ib3N0OiB3d3cuYWlzLnRoW2NybGZdW2NybGZdW3NwbGl0XVBBVENIIC8gSFRUUC8xLjFbY3JsZl1Ib3N0OiBbaG9zdF1bY3JsZl1VcGdyYWRlOiB3ZWJzb2NrZXRbY3JsZl1Vc2VyLUFnZW50OiBbdWFdW2NybGZdW2NybGZdIn19fQ==')" class="w-full bg-white text-slate-900 py-3 rounded-xl font-bold hover:bg-emerald-100 transition">คัดลอก Android Config V.1</button>
+                    <button onclick="copyConfig('darktunnel://eyJ0eXBlIjoiU1NIIiwibmFtZSI6IkFJUyBTU0ggVi4yIPCfpJ8iLCJzc2hUdW5uZWxDb25maWciOnsic3NoQ29uZmlnIjp7Imhvc3QiOiJ2aXAyLmJ1Z2hvc3Quc2l0ZSIsInVzZXJuYW1lIjoiYW0xMTExIiwicGFzc3dvcmQiOiJhbTExMTEifSwiaW5qZWN0Q29uZmlnIjp7Im1vZGUiOiJQUk9YWSIsInByb3h5SG9zdCI6IjEwNC4xNy4xOTguOCIsInByb3h5UG9ydCI6ODg4MCwicGF5bG9hZCI6IkdFVCAvIEhUVFAvMS4xW2NybGZdSG9zdDogd3d3LmFpcy5jby50aFtjcmxmXVtjcmxmXVtzcGxpdF1QQVRDSCAvIEhUVFAvMS4xW2NybGZdSG9zdDogW2hvc3RdW2NybGZdVXBncmFkZTogd2Vic29ja2V0W2NybGZdVXNlci1BZ2VudDogW3VhXVtjcmxmXVtjcmxmXSJ9fX0=')" class="w-full bg-white text-slate-900 py-3 rounded-xl font-bold hover:bg-emerald-100 transition">คัดลอก Android Config V.2</button>
+                </div>
+                <a href="https://play.google.com/store/apps/details?id=net.darktunnel.app" target="_blank" class="block text-center bg-blue-600 py-3 rounded-xl font-bold">📥 ดาวน์โหลด DARK TUNNEL</a>
+                <div class="glass-card p-5 mt-6 rounded-2xl text-sm text-slate-300">
+                    <p class="font-bold text-white mb-2">วิธีติดตั้ง Android:</p>
+                    <p>1. คัดลอก Config > 2. เปิด DARK TUNNEL > 3. กดสามจุดขวาบน > 4. เลือก Config > 5. เลือก Import > 6. เลือก Clipboard > 7. กด OK แล้ว Connected</p>
+                </div>
             </div>
 
-            <div class="glass-card p-6 rounded-3xl shadow-xl">
-                <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-xs font-bold uppercase">Version 2</span>
-                <h2 class="text-xl font-bold mt-4 mb-4">AIS SSH V.2 🚀</h2>
-                <button onclick="copyConfig('darktunnel://eyJ0eXBlIjoiU1NIIiwibmFtZSI6IkFJUyBTU0ggVi4yIPCfpJ8iLCJzc2hUdW5uZWxDb25maWciOnsic3NoQ29uZmlnIjp7Imhvc3QiOiJ2aXAyLmJ1Z2hvc3Quc2l0ZSIsInVzZXJuYW1lIjoiYW0xMTExIiwicGFzc3dvcmQiOiJhbTExMTEifSwiaW5qZWN0Q29uZmlnIjp7Im1vZGUiOiJQUk9YWSIsInByb3h5SG9zdCI6IjEwNC4xNy4xOTguOCIsInByb3h5UG9ydCI6ODg4MCwicGF5bG9hZCI6IkdFVCAvIEhUVFAvMS4xW2NybGZdSG9zdDogd3d3LmFpcy5jby50aFtjcmxmXVtjcmxmXVtzcGxpdF1QQVRDSCAvIEhUVFAvMS4xW2NybGZdSG9zdDogW2hvc3RdW2NybGZdVXBncmFkZTogd2Vic29ja2V0W2NybGZdVXNlci1BZ2VudDogW3VhXVtjcmxmXVtjcmxmXSJ9fX0=')" 
-                        class="w-full bg-white text-slate-900 font-bold py-3 rounded-xl hover:bg-slate-200 transition">คัดลอก Config V.2</button>
-            </div>
-        </div>
-
-        <!-- ขั้นตอนการติดตั้ง -->
-        <div class="glass-card p-8 rounded-3xl">
-            <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
-                📋 วิธีการใช้งาน
-            </h3>
-            <div class="grid gap-4 text-slate-300">
-                <p>1. กดปุ่ม <b>"คัดลอก Config"</b> ของเวอร์ชันที่ต้องการ</p>
-                <p>2. ดาวน์โหลดแอป <b>DARK TUNNEL</b> จาก Play Store</p>
-                <p>3. เปิดแอปขึ้นมา</p>
-                <p>4. กดตรง <b>สามจุด</b> มุมบนขวา</p>
-                <p>5. เลือก <b>Config</b> แล้วกดเลือก <b>Import</b></p>
-                <p>6. กดเลือก <b>Clipboard</b> จะมี Server เด้งขึ้นมา ให้กด <b>OK</b></p>
-                <p>7. กดปุ่ม <b>Connected</b> เพื่อเริ่มใช้งานได้เลย!</p>
+            <!-- iOS Section -->
+            <div>
+                <h2 class="text-2xl font-bold mb-6 text-blue-400 flex items-center">🍎 iOS (NPV TUNNEL)</h2>
+                <div class="space-y-4 mb-6">
+                    <button onclick="copyConfig('darktunnel://eyJ0eXBlIjoiU1NIIiwibmFtZSI6IkFJUyBTU0ggVi4yIPCfpJ8iLCJzc2hUdW5uZWxDb25maWciOnsic3NoQ29uZmlnIjp7Imhvc3QiOiJ2aXAyLmJ1Z2hvc3Quc2l0ZSIsInVzZXJuYW1lIjoiYW0xMTExIiwicGFzc3dvcmQiOiJhbTExMTEifSwiaW5qZWN0Q29uZmlnIjp7Im1vZGUiOiJQUk9YWSIsInByb3h5SG9zdCI6IjEwNC4xNy4xOTguOCIsInByb3h5UG9ydCI6ODg4MCwicGF5bG9hZCI6IkdFVCAvIEhUVFAvMS4xW2NybGZdSG9zdDogd3d3LmFpcy5jby50aFtjcmxmXVtjcmxmXVtzcGxpdF1QQVRDSCAvIEhUVFAvMS4xW2NybGZdSG9zdDogW2hvc3RdW2NybGZdVXBncmFkZTogd2Vic29ja2V0W2NybGZdVXNlci1BZ2VudDogW3VhXVtjcmxmXVtjcmxmXSJ9fX0=')" class="w-full bg-white text-slate-900 py-3 rounded-xl font-bold hover:bg-blue-100 transition">คัดลอก iOS Config V.1</button>
+                    <button onclick="copyConfig('darktunnel://eyJ0eXBlIjoiU1NIIiwibmFtZSI6IkFJUyBTU0ggVi4yIPCfpJ8iLCJzc2hUdW5uZWxDb25maWciOnsic3NoQ29uZmlnIjp7Imhvc3QiOiJ2aXAyLmJ1Z2hvc3Quc2l0ZSIsInVzZXJuYW1lIjoiYW0xMTExIiwicGFzc3dvcmQiOiJhbTExMTEifSwiaW5qZWN0Q29uZmlnIjp7Im1vZGUiOiJQUk9YWSIsInByb3h5SG9zdCI6IjEwNC4xNy4xOTguOCIsInByb3h5UG9ydCI6ODg4MCwicGF5bG9hZCI6IkdFVCAvIEhUVFAvMS4xW2NybGZdSG9zdDogd3d3LmFpcy5jby50aFtjcmxmXVtjcmxmXVtzcGxpdF1QQVRDSCAvIEhUVFAvMS4xW2NybGZdSG9zdDogW2hvc3RdW2NybGZdVXBncmFkZTogd2Vic29ja2V0W2NybGZdVXNlci1BZ2VudDogW3VhXVtjcmxmXVtjcmxmXSJ9fX0=')" class="w-full bg-white text-slate-900 py-3 rounded-xl font-bold hover:bg-blue-100 transition">คัดลอก iOS Config V.2</button>
+                </div>
+                <a href="https://apps.apple.com/us/app/npv-tunnel/id1629465476" target="_blank" class="block text-center bg-blue-600 py-3 rounded-xl font-bold">📥 ดาวน์โหลด NPV TUNNEL</a>
+                <div class="glass-card p-5 mt-6 rounded-2xl text-sm text-slate-300">
+                    <p class="font-bold text-white mb-2">วิธีติดตั้ง iOS:</p>
+                    <p>1. คัดลอก Config > 2. เปิด NPV TUNNEL > 3. กด Configs > 4. กด + > 5. กด Import From Clipboard > 6. กด SSH CONFIG > 7. กดชื่อเซิร์ฟเวอร์ให้เป็นสีฟ้า แล้ว Connected</p>
+                </div>
             </div>
         </div>
     </div>
@@ -65,7 +54,7 @@
     <script>
         function copyConfig(text) {
             navigator.clipboard.writeText(text).then(() => {
-                alert("คัดลอก Config เรียบร้อยแล้ว! นำไปวางในแอปได้เลย");
+                alert("คัดลอก Config แล้ว! นำไปวางในแอปได้เลยครับ");
             });
         }
     </script>
