@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Config Panel - Multi-Platform</title>
+    <title>MLD Shop | Config Service</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { background-color: #0f172a; }
@@ -12,50 +12,73 @@
 </head>
 <body class="text-white min-h-screen p-4 md:p-10 font-sans">
 
-    <div class="max-w-5xl mx-auto">
-        <header class="text-center mb-12">
-            <h1 class="text-4xl font-extrabold text-blue-400 mb-2">VPN CONFIG PANEL</h1>
-            <p class="text-slate-400">เลือกใช้งานตามระบบปฏิบัติการของคุณ</p>
-        </header>
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-extrabold text-blue-400 mb-2">MLD Shop Config</h1>
+            <p class="text-slate-400">คัดลอกง่าย ใช้งานสะดวก รวดเร็ว</p>
+        </div>
 
-        <!-- แถบเลือก OS -->
-        <div class="grid md:grid-cols-2 gap-10">
-            
-            <!-- Android Section -->
-            <div>
-                <h2 class="text-2xl font-bold mb-6 text-emerald-400 flex items-center">🤖 Android (DARK TUNNEL)</h2>
-                <div class="space-y-4 mb-6">
-                    <button onclick="copyConfig('darktunnel://eyJ0eXBlIjoiU1NIIiwibmFtZSI6IkFJUyBTU0ggVi4xIPCfmIEiLCJzc2hUdW5uZWxDb25maWciOnsic3NoQ29uZmlnIjp7Imhvc3QiOiJ2aXAyLmJ1Z2hvc3Quc2l0ZSIsInVzZXJuYW1lIjoiYW0xMTExIiwicGFzc3dvcmQiOiJhbTExMTEifSwiaW5qZWN0Q29uZmlnIjp7Im1vZGUiOiJQUk9YWSIsInByb3h5SG9zdCI6IjEwNC4xOC40LjUwIiwicHJveHlQb3J0Ijo4ODgwLCJwYXlsb2FkIjoiR0VUIC8gSFRUUC8xLjFbY3JsZl1Ib3N0OiB3d3cuYWlzLnRoW2NybGZdW2NybGZdW3NwbGl0XVBBVENIIC8gSFRUUC8xLjFbY3JsZl1Ib3N0OiBbaG9zdF1bY3JsZl1VcGdyYWRlOiB3ZWJzb2NrZXRbY3JsZl1Vc2VyLUFnZW50OiBbdWFdW2NybGZdW2NybGZdIn19fQ==')" class="w-full bg-white text-slate-900 py-3 rounded-xl font-bold hover:bg-emerald-100 transition">คัดลอก Android Config V.1</button>
-                    <button onclick="copyConfig('darktunnel://eyJ0eXBlIjoiU1NIIiwibmFtZSI6IkFJUyBTU0ggVi4yIPCfpJ8iLCJzc2hUdW5uZWxDb25maWciOnsic3NoQ29uZmlnIjp7Imhvc3QiOiJ2aXAyLmJ1Z2hvc3Quc2l0ZSIsInVzZXJuYW1lIjoiYW0xMTExIiwicGFzc3dvcmQiOiJhbTExMTEifSwiaW5qZWN0Q29uZmlnIjp7Im1vZGUiOiJQUk9YWSIsInByb3h5SG9zdCI6IjEwNC4xNy4xOTguOCIsInByb3h5UG9ydCI6ODg4MCwicGF5bG9hZCI6IkdFVCAvIEhUVFAvMS4xW2NybGZdSG9zdDogd3d3LmFpcy5jby50aFtjcmxmXVtjcmxmXVtzcGxpdF1QQVRDSCAvIEhUVFAvMS4xW2NybGZdSG9zdDogW2hvc3RdW2NybGZdVXBncmFkZTogd2Vic29ja2V0W2NybGZdVXNlci1BZ2VudDogW3VhXVtjcmxmXVtjcmxmXSJ9fX0=')" class="w-full bg-white text-slate-900 py-3 rounded-xl font-bold hover:bg-emerald-100 transition">คัดลอก Android Config V.2</button>
+        <!-- Tabs -->
+        <div class="flex justify-center gap-4 mb-8">
+            <button onclick="showTab('android')" id="btn-android" class="px-6 py-2 rounded-full bg-blue-600 font-bold transition">Android</button>
+            <button onclick="showTab('ios')" id="btn-ios" class="px-6 py-2 rounded-full bg-slate-700 hover:bg-slate-600 font-bold transition">iOS</button>
+        </div>
+
+        <!-- Android Content -->
+        <div id="content-android">
+            <div class="flex justify-center mb-8">
+                <a href="https://play.google.com/store/apps/details?id=net.darktunnel.app" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 py-3 px-6 rounded-xl font-bold">📥 โหลด DARK TUNNEL</a>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6 mb-10">
+                <div class="glass-card p-6 rounded-2xl">
+                    <h2 class="text-xl font-bold mb-4">AIS SSH V.1</h2>
+                    <button onclick="copyConfig('darktunnel://eyJ0eXBlIjoiU1NIIiwibmFtZSI6IkFJUyBTU0ggVi4xIPCfmIEiLCJzc2hUdW5uZWxDb25maWciOnsic3NoQ29uZmlnIjp7Imhvc3QiOiJ2aXAyLmJ1Z2hvc3Quc2l0ZSIsInVzZXJuYW1lIjoiYW0xMTExIiwicGFzc3dvcmQiOiJhbTExMTEifSwiaW5qZWN0Q29uZmlnIjp7Im1vZGUiOiJQUk9YWSIsInByb3h5SG9zdCI6IjEwNC4xOC40LjUwIiwicHJveHlQb3J0Ijo4ODgwLCJwYXlsb2FkIjoiR0VUIC8gSFRUUC8xLjFbY3JsZl1Ib3N0OiB3d3cuYWlzLnRoW2NybGZdW2NybGZdW3NwbGl0XVBBVENIIC8gSFRUUC8xLjFbY3JsZl1Ib3N0OiBbaG9zdF1bY3JsZl1VcGdyYWRlOiB3ZWJzb2NrZXRbY3JsZl1Vc2VyLUFnZW50OiBbdWFdW2NybGZdW2NybGZdIn19fQ==')" class="w-full bg-white text-black py-3 rounded-lg font-bold">คัดลอก V.1</button>
                 </div>
-                <a href="https://play.google.com/store/apps/details?id=net.darktunnel.app" target="_blank" class="block text-center bg-blue-600 py-3 rounded-xl font-bold">📥 ดาวน์โหลด DARK TUNNEL</a>
-                <div class="glass-card p-5 mt-6 rounded-2xl text-sm text-slate-300">
-                    <p class="font-bold text-white mb-2">วิธีติดตั้ง Android:</p>
-                    <p>1. คัดลอก Config > 2. เปิด DARK TUNNEL > 3. กดสามจุดขวาบน > 4. เลือก Config > 5. เลือก Import > 6. เลือก Clipboard > 7. กด OK แล้ว Connected</p>
+                <div class="glass-card p-6 rounded-2xl">
+                    <h2 class="text-xl font-bold mb-4">AIS SSH V.2</h2>
+                    <button onclick="copyConfig('darktunnel://eyJ0eXBlIjoiU1NIIiwibmFtZSI6IkFJUyBTU0ggVi4yIPCfpJ8iLCJzc2hUdW5uZWxDb25maWciOnsic3NoQ29uZmlnIjp7Imhvc3QiOiJ2aXAyLmJ1Z2hvc3Quc2l0ZSIsInVzZXJuYW1lIjoiYW0xMTExIiwicGFzc3dvcmQiOiJhbTExMTEifSwiaW5qZWN0Q29uZmlnIjp7Im1vZGUiOiJQUk9YWSIsInByb3h5SG9zdCI6IjEwNC4xNy4xOTguOCIsInByb3h5UG9ydCI6ODg4MCwicGF5bG9hZCI6IkdFVCAvIEhUVFAvMS4xW2NybGZdSG9zdDogd3d3LmFpcy5jby50aFtjcmxmXVtjcmxmXVtzcGxpdF1QQVRDSCAvIEhUVFAvMS4xW2NybGZdSG9zdDogW2hvc3RdW2NybGZdVXBncmFkZTogd2Vic29ja2V0W2NybGZdVXNlci1BZ2VudDogW3VhXVtjcmxmXVtjcmxmXSJ9fX0=')" class="w-full bg-white text-black py-3 rounded-lg font-bold">คัดลอก V.2</button>
                 </div>
             </div>
-
-            <!-- iOS Section -->
-            <div>
-                <h2 class="text-2xl font-bold mb-6 text-blue-400 flex items-center">🍎 iOS (NPV TUNNEL)</h2>
-                <div class="space-y-4 mb-6">
-                    <button onclick="copyConfig('darktunnel://eyJ0eXBlIjoiU1NIIiwibmFtZSI6IkFJUyBTU0ggVi4yIPCfpJ8iLCJzc2hUdW5uZWxDb25maWciOnsic3NoQ29uZmlnIjp7Imhvc3QiOiJ2aXAyLmJ1Z2hvc3Quc2l0ZSIsInVzZXJuYW1lIjoiYW0xMTExIiwicGFzc3dvcmQiOiJhbTExMTEifSwiaW5qZWN0Q29uZmlnIjp7Im1vZGUiOiJQUk9YWSIsInByb3h5SG9zdCI6IjEwNC4xNy4xOTguOCIsInByb3h5UG9ydCI6ODg4MCwicGF5bG9hZCI6IkdFVCAvIEhUVFAvMS4xW2NybGZdSG9zdDogd3d3LmFpcy5jby50aFtjcmxmXVtjcmxmXVtzcGxpdF1QQVRDSCAvIEhUVFAvMS4xW2NybGZdSG9zdDogW2hvc3RdW2NybGZdVXBncmFkZTogd2Vic29ja2V0W2NybGZdVXNlci1BZ2VudDogW3VhXVtjcmxmXVtjcmxmXSJ9fX0=')" class="w-full bg-white text-slate-900 py-3 rounded-xl font-bold hover:bg-blue-100 transition">คัดลอก iOS Config V.1</button>
-                    <button onclick="copyConfig('darktunnel://eyJ0eXBlIjoiU1NIIiwibmFtZSI6IkFJUyBTU0ggVi4yIPCfpJ8iLCJzc2hUdW5uZWxDb25maWciOnsic3NoQ29uZmlnIjp7Imhvc3QiOiJ2aXAyLmJ1Z2hvc3Quc2l0ZSIsInVzZXJuYW1lIjoiYW0xMTExIiwicGFzc3dvcmQiOiJhbTExMTEifSwiaW5qZWN0Q29uZmlnIjp7Im1vZGUiOiJQUk9YWSIsInByb3h5SG9zdCI6IjEwNC4xNy4xOTguOCIsInByb3h5UG9ydCI6ODg4MCwicGF5bG9hZCI6IkdFVCAvIEhUVFAvMS4xW2NybGZdSG9zdDogd3d3LmFpcy5jby50aFtjcmxmXVtjcmxmXVtzcGxpdF1QQVRDSCAvIEhUVFAvMS4xW2NybGZdSG9zdDogW2hvc3RdW2NybGZdVXBncmFkZTogd2Vic29ja2V0W2NybGZdVXNlci1BZ2VudDogW3VhXVtjcmxmXVtjcmxmXSJ9fX0=')" class="w-full bg-white text-slate-900 py-3 rounded-xl font-bold hover:bg-blue-100 transition">คัดลอก iOS Config V.2</button>
-                </div>
-                <a href="https://apps.apple.com/us/app/npv-tunnel/id1629465476" target="_blank" class="block text-center bg-blue-600 py-3 rounded-xl font-bold">📥 ดาวน์โหลด NPV TUNNEL</a>
-                <div class="glass-card p-5 mt-6 rounded-2xl text-sm text-slate-300">
-                    <p class="font-bold text-white mb-2">วิธีติดตั้ง iOS:</p>
-                    <p>1. คัดลอก Config > 2. เปิด NPV TUNNEL > 3. กด Configs > 4. กด + > 5. กด Import From Clipboard > 6. กด SSH CONFIG > 7. กดชื่อเซิร์ฟเวอร์ให้เป็นสีฟ้า แล้ว Connected</p>
-                </div>
+            <div class="glass-card p-6 rounded-2xl text-slate-300">
+                <h3 class="font-bold text-white mb-3">วิธีใช้งาน Android:</h3>
+                <p>1. คัดลอก Config | 2. โหลด DARK TUNNEL | 3. เปิดแอป | 4. กดสามจุดขวาบน | 5. เลือก Config > Import | 6. เลือก Clipboard > กด OK > Connected ได้เลย</p>
             </div>
         </div>
+
+        <!-- iOS Content -->
+        <div id="content-ios" class="hidden">
+            <div class="flex justify-center mb-8">
+                <a href="https://apps.apple.com/us/app/npv-tunnel/id1629465476" target="_blank" class="bg-blue-500 hover:bg-blue-600 py-3 px-6 rounded-xl font-bold">📥 โหลด NPV TUNNEL</a>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6 mb-10">
+                <div class="glass-card p-6 rounded-2xl">
+                    <h2 class="text-xl font-bold mb-4">AIS SSH V.1</h2>
+                    <button onclick="copyConfig('npvt-ssh://eyJzc2hDb25maWdUeXBlIjoiU1NILVByb3h5LVBheWxvYWQiLCJyZW1hcmtzIjoiQUlTIFNTSCB2LjEg4LmD4LiK4LmJ4LmG4LmE4Lib4LmA4LiW4Lit4LiwIOC5geC4geC5ieC4hOC4seC4mSIsInNzaEhvc3QiOiJ2aXAudGguMi5pbnRlcm5ldHQub25saW5lIiwic3NoUG9ydCI6MjIsInNzaFVzZXJuYW1lIjoiYW0xMTExIiwic3NoUGFzc3dvcmQiOiJhbTExMTEiLCJzbmkiOiIiLCJ0bHNWZXJzaW9uIjoiREVGQVVMVCIsImh0dHBQcm94eSI6IjEwNC4xOC40LjUwOjg4ODAiLCJhdXRoZW50aWNhdGVQcm94eSI6ZmFsc2UsInByb3h5VXNlcm5hbWUiOiIiLCJwcm94eVBhc3N3b3JkIjoiIiwicGF5bG9hZCI6IkdFVCAvIEhUVFAvMS4xW2NybGZdSG9zdDogd3d3LmFpcy50aFtjcmxmXVtjcmxmXVtzcGxpdF1QQVRDSCAvIEhUVFAvMS4xW2NybGZdSG9zdDogW2hvc3RdW2NybGZdVXBncmFkZTogd2Vic29ja2V0W2NybGZdVXNlci1BZ2VudDogW3VhXVtjcmxmXVtjcmxmXSIsImRuc1RUTW9kZSI6IlVEUCIsImRuc1NlcnZlciI6IiIsIm5hbWVzZXJ2ZXIiOiIiLCJwdWJsaWNLZXkiOiIiLCJ1ZHBnd1BvcnQiOjczMDAsInVkcGd3VHJhbnNwYXJlbnRETlMiOnRydWV9')" class="w-full bg-white text-black py-3 rounded-lg font-bold">คัดลอก V.1</button>
+                </div>
+                <div class="glass-card p-6 rounded-2xl">
+                    <h2 class="text-xl font-bold mb-4">AIS SSH V.2</h2>
+                    <button onclick="copyConfig('npvt-ssh://eyJzc2hDb25maWdUeXBlIjoiU1NILVByb3h5LVBheWxvYWQiLCJyZW1hcmtzIjoiQUlTIFNTSCB2LjIg4LmD4LiK4LmJ4LmG4LmE4Lib4LmA4LiW4Lit4LiwIOC5geC4geC5ieC4hOC4seC4mSIsInNzaEhvc3QiOiJ2aXAudGguMi5pbnRlcm5ldHQub25saW5lIiwic3NoUG9ydCI6MjIsInNzaFVzZXJuYW1lIjoiYW0xMTExIiwic3NoUGFzc3dvcmQiOiJhbTExMTEiLCJzbmkiOiIiLCJ0bHNWZXJzaW9uIjoiREVGQVVMVCIsImh0dHBQcm94eSI6IjEwNC4xNy4xOTguODo4ODgwIiwiYXV0aGVudGljYXRlUHJveHkiOmZhbHNlLCJwcm94eVVzZXJuYW1lIjoiIiwicHJveHlQYXNzd29yZCI6IiIsInBheWxvYWQiOiJHRVQgLyBIVFRQLzEuMVtjcmxmXUhvc3Q6IHd3dy5haXMuY28udGhbY3JsZl1bY3JsZl1bc3BsaXRdUEFUQ0ggLyBIVFRQLzEuMVtjcmxmXUhvc3Q6IFtob3N0XVtjcmxmXVVwZ3JhZGU6IHdlYnNvY2tldFtjcmxmXVVzZXItQWdlbnQ6IFt1YV1bY3JsZl1bY3JsZl0iLCJkbnNUVE1vZGUiOiJVRFAiLCJkbnNTZXJ2ZXIiOiIiLCJuYW1lc2VydmVyIjoiIiwicHVibGljS2V5IjoiIiwidWRwZ3dQb3J0Ijo3MzAwLCJ1ZHBnd1RyYW5zcGFyZW50RE5TIjp0cnVlfQ==')" class="w-full bg-white text-black py-3 rounded-lg font-bold">คัดลอก V.2</button>
+                </div>
+            </div>
+            <div class="glass-card p-6 rounded-2xl text-slate-300">
+                <h3 class="font-bold text-white mb-3">วิธีใช้งาน iOS:</h3>
+                <p>1. คัดลอก Config | 2. โหลด NPV TUNNEL | 3. เปิดแอป | 4. กด Configs > + > Import From Clipboard | 5. กดชื่อ Server ให้เป็นสีฟ้า > กลับหน้า Home > Connected ได้เลย</p>
+            </div>
+        </div>
+
+        <p class="text-center text-slate-500 mt-10 text-sm">Credit การลงแจก MLD Shop</p>
     </div>
 
     <script>
+        function showTab(tab) {
+            document.getElementById('content-android').classList.toggle('hidden', tab !== 'android');
+            document.getElementById('content-ios').classList.toggle('hidden', tab !== 'ios');
+            document.getElementById('btn-android').className = tab === 'android' ? 'px-6 py-2 rounded-full bg-blue-600 font-bold' : 'px-6 py-2 rounded-full bg-slate-700 hover:bg-slate-600 font-bold';
+            document.getElementById('btn-ios').className = tab === 'ios' ? 'px-6 py-2 rounded-full bg-blue-600 font-bold' : 'px-6 py-2 rounded-full bg-slate-700 hover:bg-slate-600 font-bold';
+        }
         function copyConfig(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert("คัดลอก Config แล้ว! นำไปวางในแอปได้เลยครับ");
-            });
+            navigator.clipboard.writeText(text).then(() => alert("คัดลอกสำเร็จ!"));
         }
     </script>
 </body>
