@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLD Shop | แจก Config V2Ray Vmess Vless</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap');
+        
+        body { 
+            font-family: 'Kanit', sans-serif; 
+            background-image: url('https://img2.pic.in.th/22305.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            color: #1e293b;
+        }
+
+        .page-wrapper {
+            background: rgba(255, 255, 255, 0.88); 
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .card { 
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid #e2e8f0; 
+            transition: all 0.3s ease; 
+        }
+        .card:hover { 
+            border-color: #3b82f6; 
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.15); 
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-wrapper">
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- Header -->
+            <header class="text-center mb-10">
+                <h1 class="text-4xl md:text-5xl font-bold text-blue-600 mb-2">MLD SHOP</h1>
+                <p class="text-lg text-slate-700 font-medium">✨ ศูนย์รวมแจก Config V2Ray / Vmess / Vless (ซิม AIS NOPRO) ✨</p>
+            </header>
+
+            <!-- Platform Tabs -->
+            <div class="flex justify-center flex-wrap gap-3 mb-8">
+                <button onclick="switchTab('dt')" id="tab-dt" class="px-5 py-3 rounded-2xl bg-blue-600 text-white font-bold shadow-lg transition flex items-center gap-2">
+                    📱 Android (Dark Tunnel)
+                </button>
+                <button onclick="switchTab('nm')" id="tab-nm" class="px-5 py-3 rounded-2xl bg-white border border-slate-300 text-slate-700 font-bold hover:bg-slate-50 transition flex items-center gap-2">
+                    🤖 Android (NetMod)
+                </button>
+                <button onclick="switchTab('ios')" id="tab-ios" class="px-5 py-3 rounded-2xl bg-white border border-slate-300 text-slate-700 font-bold hover:bg-slate-50 transition flex items-center gap-2">
+                    🍏 iOS (NPV Tunnel)
+                </button>
+            </div>
+
+            <!-- ================= DARK TUNNEL SECTION ================= -->
+            <div id="section-dt" class="space-y-6">
+                <div class="text-center">
+                    <a href="https://play.google.com/store/apps/details?id=net.darktunnel.app" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white font-bold rounded-xl shadow hover:bg-emerald-700 transition">
+                        📥 ดาวน์โหลดแอป DARK TUNNEL (Play Store)
+                    </a>
+                </div>
+
+                <div class="card p-6 rounded-3xl">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-800">DARK TUNNEL 🎃 V.1 (AIS NOPRO)</h2>
+                            <p class="text-xs text-slate-500 mt-1">คัดลอกใช้งานแล้ว: <span id="count-dt" class="text-blue-600 font-bold">0</span> ครั้ง</p>
+                        </div>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-600 text-xs font-bold rounded-full">Dark Tunnel</span>
+                    </div>
+                    
+                    <button onclick="copyConfig('dt', 'darktunnel://eyJ0eXBlIjoiU1NIIiwibmFtZSI6IkFJUyBObyBQcm8g8J-koeC4iuC4uOC4lOC4n-C4o-C4tToyNDkiLCJzc2hUdW5uZWxDb25maWciOnsic3NoQ29uZmlnIjp7Imhvc3QiOiJkMWZiOGw5bWx4eTd4Yy5jbG91ZGZyb250Lm5ldCIsInVzZXJuYW1lIjoiTUxEU0hPUDE5MSIsInBhc3N3b3JkIjoiTUxEU0hPUDE5MSJ9LCJpbmplY3RDb25maWciOnsibW9kZSI6IlBST1hZIiwicHJveHlIb3N0IjoiYWlzLm5vcHJvLWNmLmJ1Z2hvc3Quc2l0ZSIsInByb3h5UG9ydCI6ODAsInBheWxvYWQiOiJHRVQgL3NzaCBIVFRQLzEuMVtjcmxmXUhvc3Q6IHByZC1zdGF0aWMtZmlsZS5hd3MuY2xpY3hiYW5rLmNvbVtjcmxmXVtjcmxmXVBVUkdFIC9zc2ggSFRUUC8xLjFbY3JsZl1Ib3N0OiBwcmQtc3RhdGljLWZpbGUuYXdzLmNsaWN4YmFuay5jb21bY3JsZl1bY3JsZl1HRVQgL3NzaCBIVFRQLzEuMVtjcmxmXUhvc3Q6IFtob3N0XVtjcmxmXVVwZ3JhZGU6IHdlYnNvY2tldFtjcmxmXUNvbm5lY3Rpb246IFVwZ3JhZGVbY3JsZl1Vc2VyLUFnZW50OiBbdWFdW2NybGZdW2NybGZdIn19fQ==')" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-md">
+                        📋 คัดลอก Config Dark Tunnel V.1
+                    </button>
+                </div>
+
+                <div class="bg-blue-50/80 border border-blue-200 p-6 rounded-3xl text-sm text-slate-700 space-y-2">
+                    <h3 class="font-bold text-blue-900 text-base mb-3">📖 วิธีการนำ Config ใส่แอป Android (DARK TUNNEL)</h3>
+                    <p>1. คัดลอก Config</p>
+                    <p>2. ดาวน์โหลดแอป DARK TUNNEL</p>
+                    <p>3. เปิดแอปขึ้นมา</p>
+                    <p>4. กดตรงสามจุด บนขวา</p>
+                    <p>5. เลือก Config</p>
+                    <p>6. เลือก Import</p>
+                    <p>7. เลือก Clipboard (จะมี Server เด้งขึ้นมาแล้วกด OK)</p>
+                    <p>8. กด Connected ได้เลย</p>
+                </div>
+            </div>
+
+            <!-- ================= NETMOD SECTION ================= -->
+            <div id="section-nm" class="space-y-6 hidden">
+                <div class="text-center">
+                    <a href="https://play.google.com/store/apps/details?id=com.netmod.syna" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white font-bold rounded-xl shadow hover:bg-indigo-700 transition">
+                        📥 ดาวน์โหลดแอป NETMOD (Play Store)
+                    </a>
+                </div>
+
+                <div class="card p-6 rounded-3xl">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-800">NETMOD 🎃 V.1 (AIS NOPRO)</h2>
+                            <p class="text-xs text-slate-500 mt-1">คัดลอกใช้งานแล้ว: <span id="count-nm" class="text-blue-600 font-bold">0</span> ครั้ง</p>
+                        </div>
+                        <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-xs font-bold rounded-full">NetMod</span>
+                    </div>
+                    
+                    <button onclick="copyConfig('nm', 'nm-ssh://oD1wIwXd8hkPBPH+VbGxuxBjWbv+/GMUGCSrQDRReAe3t6+vl9BArRlGU3lwotPZXxWN+hRJMK2CSUIDq96N3M9XSE8ZODSF8CqxooXFT9KPLJtte61VaEQDtGJCKbkyQvP0u+T6oXifZmvvL+GVQLETs9cB3MOSjqtvMmT4D4iY+Xa97kdFbIWYhFsILTe7i6ZJ0ziq2kkGnEKNCJifLlz6avJoiNnS3GxM9tvfTLNJwMT00trIu82AFiIeWbV4+LnOMqWQaMRpocjzXWIWJqXAumsC5HBz9HDhFxmnCMIgE90adiOyD8pnwDPvKe1TiIm4sqU70mzVPeelpKMdMXLnDbYP5TAvEoljBEXRFTx3L4pVKdxqXWn5ZhrrQyUMOiYBAg0bcGYBN4zH6xmMZ7/VmN8bp7SwxHeJWdPuzK+E7Zauf30ThQyIjgwuSQuGa99IVmrG2rnjjePGcDlCJHXctAWTJAB9s8vRFu1gxubfZz8ENlkx8Kz3VWnOn/adzfn468OESboEUHJKoLYwQ2HM/beqxV5WuriPrzPhc+vFF3UNfhdPRQW2Y+kLrwcXkErAAWqgzIL4s244fboZpZj5dr3uR0VshZiEWwgtN7uLpknTOKraSQacQo0ImJ8u2aekH8TzOwHAyPFPuAijtQX1fiO4opsZWbi+24BEqWkiNG5aUFGqO0zAl6H42Kr+HLcOIimI3Q01IpXW5AgGMW3IPsWc47dlppVRHzJmrzqqC6SulASi8Fh5uw3QN5SqOyppUfACX21nnuLuabUut/h8KJoN1/Mhm3uQQ1Mu6V9ajjWWVAeh46iOJf/DDKr7MBSw0wfhwaNEwrsmt0b9DaprpRKoJz0rDr19cVNCIZhlmxBQFUAFKmd2PZJSD8q3IEvQmFLksHVQv6ArFsqsB3Avokr3ci9Uoen/c/TqpAHAJVLJw7rKwln2r6Ne9fBJteNKcG553dAx1jBbfUXHx1MxSSoJFwofGXNHiLQaqqpLalD/uivBALTkuaUc2OU2L/W2f/ejrfSSiC9x9crIrXiqk26espQv9e1PHpVReSFvUyVvSKlBRGHs72h69mUbuJxKHY4X+tATr/Jdh6VADA==')" class="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 transition shadow-md">
+                        📋 คัดลอก Config NetMod V.1
+                    </button>
+                </div>
+
+                <div class="bg-indigo-50/80 border border-indigo-200 p-6 rounded-3xl text-sm text-slate-700 space-y-2">
+                    <h3 class="font-bold text-indigo-900 text-base mb-3">📖 วิธีการนำ Config ใส่แอป Android (NETMOD)</h3>
+                    <p>1. คัดลอก Config</p>
+                    <p>2. ดาวน์โหลดแอป NETMOD</p>
+                    <p>3. เปิดแอปขึ้นมา</p>
+                    <p>4. กดตรงรูปลิงก์ บนขวา (อันที่ 2)</p>
+                    <p>5. นำไฟล์วางแล้วกด Import</p>
+                    <p>6. กดตรงวงกลมที่มีสามเหลี่ยมอยู่ข้างใน แค่นี้</p>
+                </div>
+            </div>
+
+            <!-- ================= IOS SECTION ================= -->
+            <div id="section-ios" class="space-y-6 hidden">
+                <div class="text-center">
+                    <a href="https://apps.apple.com/us/app/npv-tunnel/id1629465476" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white font-bold rounded-xl shadow hover:bg-slate-800 transition">
+                        📥 ดาวน์โหลดแอป NPV TUNNEL (App Store)
+                    </a>
+                </div>
+
+                <div class="card p-6 rounded-3xl">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-800">NPV TUNNEL 🧟‍♀️ V.1 (AIS NOPRO)</h2>
+                            <p class="text-xs text-slate-500 mt-1">คัดลอกใช้งานแล้ว: <span id="count-ios" class="text-blue-600 font-bold">0</span> ครั้ง</p>
+                        </div>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-600 text-xs font-bold rounded-full">NPV Tunnel</span>
+                    </div>
+                    
+                    <button onclick="copyConfig('ios', 'npvt-ssh://eyJzc2hDb25maWdUeXBlIjoiU1NILVByb3h5LVBheWxvYWQiLCJyZW1hcmtzIjoiQUlTIE5PUFJPIPCfpKHguIrguLjguJTguJ/guKPguLU6MjQ5Iiwic3NoSG9zdCI6ImQxZmI4bDltbHh5N3hjLmNsb3VkZnJvbnQubmV0Iiwic3NoUG9ydCI6MjIsInNzaFVzZXJuYW1lIjoiTUxEU0hPUDE5MSIsInBhc3N3b3JkIjoiTUxEU0hPUDE5MSIsInNuaSI6IiIsInRsc1ZlcnNpb24iOiJERUZBVUxUIiwiaHR0cFByb3h5IjoicHJkLXN0YXRpYy1maWxlLmF3cy5jbGljeGJhbmsuY29tOjgwIiwiYXV0aGVudGljYXRlUHJveHkiOmZhbHNlLCJwcm94eVVzZXJuYW1lIjoiIiwicHJveHlQYXNzd29yZCI6IiIsInBheWxvYWQiOiJHRVQgL3NzaCBIVFRQLzEuMVtjcmxmXUhvc3Q6IHByZC1zdGF0aWMtZmlsZS5hd3MuY2xpY3hiYW5rLmNvbVtjcmxmXVtjcmxmXVBVUkdFIC9zc2ggSFRUUC8xLjFbY3JsZl1Ib3N0OiBwcmQtc3RhdGljLWZpbGUuYXdzLmNsaWN4YmFuay5jb21bY3JsZl1bY3JsZl1HRVQgL3NzaCBIVFRQLzEuMVtjcmxmXUhvc3Q6IFtob3N0XVtjcmxmXVVwZ3JhZGU6IHdlYnNvY2tldFtjcmxmXUNvbm5lY3Rpb246IFVwZ3JhZGVbY3JsZl1Vc2VyLUFnZW50OiBbdWFdW2NybGZdW2NybGZdIiwiZG5zVFRNb2RlIjoiVURQIiwiZG5zU2VydmVyIjoiIiwibmFtZXNlcnZlciI6IiIsInB1YmxpY0tleSI6IiIsInVkcGd3UG9ydCI6NzMwMCwidWRwZ3dUcmFuc3BhcmVudEROUyI6dHJ1ZX0=')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-slate-800 transition shadow-md">
+                        📋 คัดลอก Config NPV Tunnel V.1
+                    </button>
+                </div>
+
+                <div class="bg-slate-100 border border-slate-200 p-6 rounded-3xl text-sm text-slate-700 space-y-2">
+                    <h3 class="font-bold text-slate-900 text-base mb-3">📖 วิธีการนำ Config ใส่แอป iOS (NPV TUNNEL)</h3>
+                    <p>1. คัดลอก Config</p>
+                    <p>2. ดาวน์โหลดแอป NPV TUNNEL บน App Store</p>
+                    <p>3. เปิดแอปขึ้นมา</p>
+                    <p>4. กด Configs ด้านล่าง</p>
+                    <p>5. กด + บนขวามือ</p>
+                    <p>6. กด Import From Clipboard</p>
+                    <p>7. กด SSH CONFIG</p>
+                    <p>8. จะมี Server เด้งขึ้นมา ให้กดตรงชื่อเซิร์ฟเวอร์ให้เป็นสีฟ้า แล้วกดกลับหน้า Home แล้วกด Connected ได้เลย</p>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="text-center mt-12 text-slate-500 text-sm font-medium">
+                Credit การลงแจก: MLD Shop
+            </footer>
+
+        </div>
+    </div>
+
+    <script>
+        function switchTab(platform) {
+            document.getElementById('section-dt').classList.toggle('hidden', platform !== 'dt');
+            document.getElementById('section-nm').classList.toggle('hidden', platform !== 'nm');
+            document.getElementById('section-ios').classList.toggle('hidden', platform !== 'ios');
+
+            const tabs = ['dt', 'nm', 'ios'];
+            tabs.forEach(t => {
+                const btn = document.getElementById('tab-' + t);
+                if (t === platform) {
+                    if (t === 'nm') {
+                        btn.className = "px-5 py-3 rounded-2xl bg-indigo-600 text-white font-bold shadow-lg transition flex items-center gap-2";
+                    } else if (t === 'ios') {
+                        btn.className = "px-5 py-3 rounded-2xl bg-slate-900 text-white font-bold shadow-lg transition flex items-center gap-2";
+                    } else {
+                        btn.className = "px-5 py-3 rounded-2xl bg-blue-600 text-white font-bold shadow-lg transition flex items-center gap-2";
+                    }
+                } else {
+                    btn.className = "px-5 py-3 rounded-2xl bg-white border border-slate-300 text-slate-700 font-bold hover:bg-slate-50 transition flex items-center gap-2";
+                }
+            });
+        }
+
+        function copyConfig(id, text) {
+            navigator.clipboard.writeText(text).then(() => {
+                let count = parseInt(localStorage.getItem('count-' + id) || 0) + 1;
+                localStorage.setItem('count-' + id, count);
+                document.getElementById('count-' + id).innerText = count;
+                alert("✅ คัดลอก Config สำเร็จ! นำไปใส่ในแอปได้เลย");
+            }).catch(err => {
+                alert("❌ คัดลอกไม่สำเร็จ กรุณาลองใหม่อีกครั้ง");
+            });
+        }
+
+        window.onload = () => {
+            ['dt', 'nm', 'ios'].forEach(id => {
+                const count = localStorage.getItem('count-' + id) || 0;
+                const el = document.getElementById('count-' + id);
+                if (el) el.innerText = count;
+            });
+        };
+    </script>
+</body>
+</html>
